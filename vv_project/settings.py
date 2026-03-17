@@ -1,12 +1,23 @@
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-go_uql*xqcg#-nv1^$zgq)$+byt)2usih)*g$ueus-m5qn3$y3'
 
-DEBUG = True
 
-ALLOWED_HOSTS = []
+def env_bool(key: str, default: bool = False) -> bool:
+    v = os.environ.get(key)
+    if v is None:
+        return default
+    return str(v).strip().lower() in {"1", "true", "yes", "on"}
+
+DEBUG = env_bool("DJANGO_DEBUG", True)
+
+ALLOWED_HOSTS = [
+    "www.vouchervenue.com",
+    "vouchervenue.com","localhost:8000",
+]
 
 
 INSTALLED_APPS = [

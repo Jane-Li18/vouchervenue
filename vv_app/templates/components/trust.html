@@ -1,0 +1,99 @@
+{% load static %}
+
+<style>
+  .vv-trust-strip {
+    background-color: var(--primary-bg);
+    border-top: 1px solid rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    font-family: var(--font-family-base);
+    overflow: hidden;
+  }
+
+  .vv-trust-track {
+    width: max-content;
+    min-width: 100%;
+    animation: vvTrustScroll 24s linear infinite;
+    will-change: transform;
+  }
+
+  .vv-trust-item {
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  .vv-trust-text {
+    font-family: var(--font-family-base);
+    font-size: 1rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--secondary-accent);
+    white-space: nowrap;
+  }
+
+  .vv-trust-dot {
+    width: .45rem;
+    height: .45rem;
+    border-radius: 50%;
+    background-color: var(--tertiary-accent);
+    flex: 0 0 auto;
+  }
+
+  @keyframes vvTrustScroll {
+    0% {
+      transform: translate3d(-50%, 0, 0);
+    }
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .vv-trust-track {
+      animation-duration: 18s;
+    }
+
+    .vv-trust-text {
+      font-size: .88rem;
+      letter-spacing: .06em;
+    }
+
+    .vv-trust-dot {
+      width: .38rem;
+      height: .38rem;
+    }
+  }
+</style>
+
+<section class="vv-trust-strip py-3 py-md-4">
+  <div class="vv-trust-track d-flex align-items-center gap-3 gap-md-4">
+    <div class="vv-trust-item d-inline-flex align-items-center gap-3 gap-md-4">
+      <span class="vv-trust-text">Welcome to smarter affiliate growth</span>
+      <span class="vv-trust-dot"></span>
+      <span class="vv-trust-text">Where trusted partners grow together</span>
+      <span class="vv-trust-dot"></span>
+      <span class="vv-trust-text">Built for brands. Designed for affiliates</span>
+      <span class="vv-trust-dot"></span>
+      <span class="vv-trust-text">Meaningful traffic. Lasting revenue</span>
+      <span class="vv-trust-dot"></span>
+      <span class="vv-trust-text">Start with trust. Scale with confidence</span>
+      <span class="vv-trust-dot"></span>
+      <span class="vv-trust-text">A more elevated way to earn online</span>
+      <span class="vv-trust-dot"></span>
+    </div>
+
+    <div class="vv-trust-item d-inline-flex align-items-center gap-3 gap-md-4">
+      <span class="vv-trust-text">Welcome to smarter affiliate growth</span>
+      <span class="vv-trust-dot"></span>
+      <span class="vv-trust-text">Where trusted partners grow together</span>
+      <span class="vv-trust-dot"></span>
+      <span class="vv-trust-text">Built for brands. Designed for affiliates</span>
+      <span class="vv-trust-dot"></span>
+      <span class="vv-trust-text">Meaningful traffic. Lasting revenue</span>
+      <span class="vv-trust-dot"></span>
+      <span class="vv-trust-text">Start with trust. Scale with confidence</span>
+      <span class="vv-trust-dot"></span>
+      <span class="vv-trust-text">A more elevated way to earn online</span>
+      <span class="vv-trust-dot"></span>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,322 @@
+{% load static %}
+
+<footer class="vv-footer position-relative">
+  <div class="container py-4 py-lg-5">
+    <div class="position-relative overflow-hidden">
+      <div class="row g-4 g-xl-5 align-items-start">
+        <div class="col-12 col-lg-5">
+          <a href="/" class="d-inline-flex align-items-center text-decoration-none mb-4">
+            <img
+              src="{% static 'full-logo-vv.png' %}"
+              alt="Voucher Venue"
+              class="img-fluid vv-footer-logo"
+            >
+          </a>
+
+          <div class="vv-partner-badge mb-3">
+            Elevated affiliate experiences
+          </div>
+
+          <p class="mb-4 pe-lg-4">
+            Voucher Venue brings together premium partner visibility, thoughtful collaboration,
+            and refined digital presentation crafted for brands that value polish,
+            performance, and purpose.
+          </p>
+
+          <div class="d-flex flex-wrap gap-2 gap-md-3">
+            <a href="#vv-partners" class="btn btn-primary px-4">
+              Explore Partners
+            </a>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-2">
+          <div class="vv-footer-block">
+            <h6 class="vv-footer-heading">Navigation</h6>
+            <ul class="mb-0 d-grid gap-2 vv-footer-list">
+              <li><a href="/" class="vv-footer-link">Home</a></li>
+              <li><a href="/about/" class="vv-footer-link">About</a></li>
+              <li><a href="#vv-partners" class="vv-footer-link">Partners</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-2">
+          <div class="vv-footer-block">
+            <h6 class="vv-footer-heading">Highlights</h6>
+            <ul class="mb-0 d-grid gap-2 vv-footer-list">
+              <li><span class="vv-footer-meta">Luxury brand feel</span></li>
+              <li><span class="vv-footer-meta">Partner spotlight design</span></li>
+              <li><span class="vv-footer-meta">Thoughtful collaboration</span></li>
+              <li><span class="vv-footer-meta">Performance-driven presence</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-3">
+          <div class="vv-footer-cta-wrap">
+            <h6 class="vv-footer-heading">Start a conversation</h6>
+            <p class="text-body-sm mb-3 vv-footer-note">
+              Ready to feature your brand with a more elevated partner presentation?
+            </p>
+
+            <div class="vv-footer-card rounded-4 p-3 p-md-4">
+              <div class="small text-uppercase vv-footer-card-label mb-2">Let’s Build Something Refined</div>
+              <p class="mb-3 text-body-sm">
+                Connect with Voucher Venue for collaborations, affiliate opportunities, and
+                polished brand visibility.
+              </p>
+              <a href="#vv-partners" class="btn btn-secondary w-100">
+                Get in Touch with our Partnerships
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vv-footer-divider my-4 my-lg-5"></div>
+
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-between gap-3">
+        <p class="mb-0 text-body-sm text-center text-md-start">
+          &copy; {% now "Y" %} Voucher Venue. All rights reserved.
+        </p>
+
+        <div class="d-flex flex-wrap justify-content-center gap-3 gap-md-4 vv-footer-bottom-links">
+          <a href="/" class="vv-footer-bottom-link">Home</a>
+          <a href="/about/" class="vv-footer-bottom-link">About</a>
+          <a href="#vv-partners" class="vv-footer-bottom-link">Partners</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+.vv-footer {
+    background:
+        radial-gradient(circle at top left, color-mix(in srgb, var(--primary-accent) 16%, white 84%) 0%, transparent 34%),
+        radial-gradient(circle at bottom right, color-mix(in srgb, var(--tertiary-accent) 10%, white 90%) 0%, transparent 30%);
+}
+
+.vv-footer-logo {
+    max-width: min(230px, 78vw);
+    height: auto;
+}
+
+.vv-footer-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    padding: .6rem 1rem;
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--primary-accent) 12%, white 88%);
+    border: 1px solid color-mix(in srgb, var(--primary-accent) 18%, white 82%);
+    color: var(--secondary-accent);
+    font-size: .74rem;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+.vv-footer-heading {
+    margin-bottom: 1rem;
+    color: var(--secondary-accent);
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+}
+
+.vv-footer-block,
+.vv-footer-cta-wrap {
+    min-height: 100%;
+}
+
+.vv-footer-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.vv-footer-link,
+.vv-footer-bottom-link {
+    color: var(--secondary-text);
+    font-size: var(--font-size-body-sm);
+    font-weight: 500;
+    transition:
+        color var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.vv-footer-link:hover,
+.vv-footer-bottom-link:hover {
+    color: var(--primary-text);
+}
+
+.vv-footer-link:hover {
+    transform: translateX(4px);
+}
+
+.vv-footer-meta {
+    display: inline-flex;
+    align-items: flex-start;
+    color: var(--secondary-text);
+    font-size: var(--font-size-body-sm);
+    position: relative;
+    padding-left: 1rem;
+    line-height: 1.55;
+}
+
+.vv-footer-meta::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .45rem;
+    width: .45rem;
+    height: .45rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-accent), var(--tertiary-accent));
+    box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--primary-accent) 14%, transparent);
+}
+
+.vv-footer-card {
+    background: linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.58));
+    border: 1px solid color-mix(in srgb, var(--primary-accent) 18%, white 82%);
+    box-shadow: 0 18px 40px rgba(28, 28, 28, .06);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.vv-footer-card-label {
+    color: var(--tertiary-accent);
+    font-weight: 600;
+    letter-spacing: .15em;
+}
+
+.vv-footer-note {
+    max-width: 32ch;
+}
+
+.vv-footer-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        color-mix(in srgb, var(--primary-accent) 30%, white 70%) 20%,
+        color-mix(in srgb, var(--tertiary-accent) 44%, white 56%) 50%,
+        color-mix(in srgb, var(--primary-accent) 30%, white 70%) 80%,
+        transparent 100%
+    );
+    opacity: .9;
+}
+
+@media (max-width: 767.98px) {
+    .vv-footer .container {
+        padding-top: 2.25rem;
+        padding-bottom: 2.25rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .vv-footer .row {
+        row-gap: 1rem;
+    }
+
+    .vv-footer .row > div {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    /* all stacked sections get the same depth + padding */
+    .vv-footer-block,
+    .vv-footer-cta-wrap {
+        padding: 1.1rem 1rem;
+        border-radius: 1.15rem;
+        background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
+        border: 1px solid color-mix(in srgb, var(--primary-accent) 12%, white 88%);
+        box-shadow:
+            0 14px 34px rgba(28, 28, 28, .06),
+            0 4px 12px rgba(28, 28, 28, .04);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .vv-footer-heading {
+        font-size: .74rem;
+        letter-spacing: .16em;
+        margin-bottom: .85rem;
+    }
+
+    .vv-footer-list {
+        gap: .75rem !important;
+        margin-bottom: 0;
+    }
+
+    .vv-footer-link,
+    .vv-footer-bottom-link,
+    .vv-footer-meta {
+        font-size: .98rem;
+    }
+
+    .vv-footer-link {
+        display: block;
+        line-height: 1.4;
+    }
+
+    .vv-footer-meta {
+        display: flex;
+        line-height: 1.45;
+        padding-left: 1rem;
+    }
+
+    .vv-footer-meta::before {
+        top: .5rem;
+    }
+
+    .vv-footer-note {
+        max-width: none;
+        margin-bottom: .85rem !important;
+    }
+
+    /* remove double-card look inside Start a conversation */
+    .vv-footer-card {
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        padding: 0 !important;
+    }
+
+    .vv-footer .btn {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    .vv-footer-bottom-links {
+        row-gap: .45rem;
+        column-gap: 1rem !important;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .vv-footer-logo {
+        max-width: 185px;
+    }
+
+    .vv-footer-eyebrow {
+        font-size: .68rem;
+        letter-spacing: .14em;
+        padding: .55rem .85rem;
+    }
+
+    .vv-footer-block,
+    .vv-footer-cta-wrap {
+        padding: 1rem .95rem;
+        border-radius: 1rem;
+    }
+
+    .vv-footer .d-flex.flex-wrap.gap-2.gap-md-3 {
+        flex-direction: column;
+    }
+}
+</style>

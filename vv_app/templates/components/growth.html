@@ -1,0 +1,600 @@
+{% load static %}
+
+<section id="vv-growth" class="vv-growth position-relative overflow-hidden py-5 py-lg-6">
+  <div class="vv-growth-floaters" aria-hidden="true">
+    <img src="{% static 'images/react/heart.png' %}" alt="" class="vv-growth-floater vv-growth-floater-1">
+    <img src="{% static 'images/react/like.png' %}" alt="" class="vv-growth-floater vv-growth-floater-2">
+    <img src="{% static 'images/react/heart.png' %}" alt="" class="vv-growth-floater vv-growth-floater-3">
+    <img src="{% static 'images/react/like.png' %}" alt="" class="vv-growth-floater vv-growth-floater-4">
+    <img src="{% static 'images/react/heart.png' %}" alt="" class="vv-growth-floater vv-growth-floater-5">
+    <img src="{% static 'images/react/like.png' %}" alt="" class="vv-growth-floater vv-growth-floater-6">
+  </div>
+
+  <div class="container position-relative">
+    <div class="row justify-content-center">
+      <div class="col-12 col-xl-10 text-center mb-4 mb-lg-5">
+        <div class="vv-partner-badge mb-3">Growth & Performance</div>
+
+        <h2 class="vv-growth-title mb-3">
+          <span class="vv-growth-title-line vv-growth-title-line-1 d-block">Be Part of</span>
+          <span class="vv-growth-title-line vv-growth-title-line-2 d-block">Involve’s Growth</span>
+        </h2>
+
+        <p class="vv-growth-intro mx-auto mb-0">
+          Premium affiliate momentum, trusted advertiser relationships, and measurable results
+          presented through a more refined and elevated ecosystem.
+        </p>
+      </div>
+    </div>
+
+    <div class="vv-growth-shell rounded-4 p-2 p-md-3 p-xl-4">
+      <div class="row g-3 g-xl-0 text-center">
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="vv-growth-card h-100 px-3 px-md-4 py-4 py-lg-5">
+            <div
+              class="vv-growth-value"
+              data-value="800000"
+              data-prefix=""
+              data-suffix="+"
+              data-decimals="0"
+            >
+              800,000+
+            </div>
+            <p class="vv-growth-label mb-0">Affiliate Partners</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="vv-growth-card h-100 px-3 px-md-4 py-4 py-lg-5">
+            <div
+              class="vv-growth-value"
+              data-value="500"
+              data-prefix=""
+              data-suffix="+"
+              data-decimals="0"
+            >
+              500+
+            </div>
+            <p class="vv-growth-label mb-0">Advertisers</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="vv-growth-card h-100 px-3 px-md-4 py-4 py-lg-5">
+            <div
+              class="vv-growth-value"
+              data-value="300000"
+              data-prefix=""
+              data-suffix="+"
+              data-decimals="0"
+            >
+              300,000+
+            </div>
+            <p class="vv-growth-label mb-0">Sales Generated</p>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+          <div class="vv-growth-card h-100 px-3 px-md-4 py-4 py-lg-5">
+            <div
+              class="vv-growth-value"
+              data-value="28600"
+              data-prefix=""
+              data-suffix="+"
+              data-decimals="0"
+            >
+              28,600+
+            </div>
+            <p class="vv-growth-label mb-0">Partner Payouts</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .vv-growth {
+    background:
+      radial-gradient(circle at top center, color-mix(in srgb, var(--primary-accent) 10%, white 90%) 0%, transparent 34%),
+      linear-gradient(180deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+    isolation: isolate;
+  }
+
+  .vv-growth::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.42), rgba(255,255,255,.12)),
+      radial-gradient(circle at 16% 16%, rgba(255,255,255,.82), transparent 20%),
+      radial-gradient(circle at 82% 10%, rgba(255,255,255,.5), transparent 22%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .vv-growth .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .vv-growth-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .62rem 1rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--primary-accent) 12%, white 88%);
+    border: 1px solid color-mix(in srgb, var(--primary-accent) 18%, white 82%);
+    color: var(--secondary-accent);
+    font-size: .74rem;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+
+  .vv-growth-title {
+    margin: 0;
+    line-height: 1.03;
+  }
+
+  .vv-growth-title-line {
+    color: var(--secondary-accent);
+    font-weight: 700;
+    letter-spacing: -.04em;
+    text-wrap: balance;
+    will-change: transform;
+  }
+
+  .vv-growth-title-line-1 {
+    font-size: clamp(2rem, 4.2vw, 3.15rem);
+    animation: vvGrowthTitleFloatA 9s ease-in-out infinite;
+  }
+
+  .vv-growth-title-line-2 {
+    font-size: clamp(2.35rem, 5vw, 4.25rem);
+    animation: vvGrowthTitleFloatB 11s ease-in-out infinite;
+    color: var(--tertiary-accent);
+  }
+
+  @keyframes vvGrowthTitleFloatA {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    50% { transform: translateX(6px); }
+    75% { transform: translateX(-4px); }
+  }
+
+  @keyframes vvGrowthTitleFloatB {
+    0%, 100% { transform: translateX(0); }
+    30% { transform: translateX(10px); }
+    60% { transform: translateX(-7px); }
+    85% { transform: translateX(4px); }
+  }
+
+  .vv-growth-intro {
+    max-width: 64ch;
+    color: var(--secondary-text);
+    font-size: clamp(1rem, 1.5vw, 1.08rem);
+    line-height: 1.7;
+  }
+
+  .vv-growth-shell {
+    position: relative;
+    background: linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,.64));
+    border: 1px solid color-mix(in srgb, var(--primary-accent) 14%, white 86%);
+    box-shadow:
+      0 26px 70px rgba(28, 28, 28, .06),
+      0 10px 24px rgba(28, 28, 28, .04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    overflow: hidden;
+  }
+
+  .vv-growth-shell::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.42) 50%, transparent 100%);
+    opacity: .45;
+    pointer-events: none;
+  }
+
+  .vv-growth-card {
+    position: relative;
+    min-height: 100%;
+    background: transparent;
+    opacity: 0;
+    transform: translateY(26px);
+    transition:
+      transform .7s cubic-bezier(.22, .61, .36, 1),
+      opacity .7s ease,
+      background-color var(--transition-fast);
+  }
+
+  .vv-growth-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .vv-growth-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,.18);
+  }
+
+  .vv-growth-value {
+    margin-bottom: .8rem;
+    color: var(--secondary-accent);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.02;
+    letter-spacing: -.04em;
+  }
+
+  .vv-growth-label {
+    max-width: 17ch;
+    margin-inline: auto;
+    color: var(--secondary-accent);
+    font-size: clamp(1rem, 1.35vw, 1.08rem);
+    font-weight: 600;
+    line-height: 1.16;
+    text-wrap: balance;
+  }
+
+  .vv-growth-card::after {
+    content: "";
+    position: absolute;
+    top: 16%;
+    right: 0;
+    width: 1px;
+    height: 68%;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      color-mix(in srgb, var(--primary-border) 65%, transparent) 18%,
+      color-mix(in srgb, var(--primary-border) 65%, transparent) 82%,
+      transparent 100%
+    );
+  }
+
+  .vv-growth-floaters {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .vv-growth-floater {
+    position: absolute;
+    left: var(--left, 50%);
+    bottom: -10rem;
+    width: var(--size, 72px);
+    height: auto;
+    opacity: var(--opacity, .3);
+    filter: none;
+    will-change: transform, opacity;
+    transform-origin: center;
+    animation: vvGrowthLuxuryRise var(--duration, 30s) linear infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  @keyframes vvGrowthLuxuryRise {
+    0% {
+      transform:
+        translate3d(0, 0, 0)
+        scale(var(--scale-start, .88))
+        rotate(var(--rotate-start, 0deg));
+      opacity: 0;
+    }
+    10% {
+      opacity: calc(var(--opacity, .3) * .98);
+    }
+    45% {
+      transform:
+        translate3d(var(--drift-x1, 10px), var(--rise-1, -36vh), 0)
+        scale(var(--scale-mid, .98))
+        rotate(var(--rotate-mid, 6deg));
+      opacity: var(--opacity, .3);
+    }
+    78% {
+      transform:
+        translate3d(var(--drift-x2, -8px), var(--rise-2, -74vh), 0)
+        scale(var(--scale-end, 1.06))
+        rotate(var(--rotate-end, -7deg));
+      opacity: calc(var(--opacity, .3) * .78);
+    }
+    100% {
+      transform:
+        translate3d(var(--drift-x3, 6px), var(--rise-3, -112vh), 0)
+        scale(calc(var(--scale-end, 1.06) + .04))
+        rotate(calc(var(--rotate-end, -7deg) + 4deg));
+      opacity: 0;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .vv-growth-card:last-child::after {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1199.98px) {
+    .vv-growth-card::after {
+      display: none;
+    }
+  }
+
+  @media (min-width: 576px) and (max-width: 1199.98px) {
+    .vv-growth-shell .col-sm-6:nth-child(1) .vv-growth-card,
+    .vv-growth-shell .col-sm-6:nth-child(2) .vv-growth-card {
+      border-bottom: 1px solid color-mix(in srgb, var(--primary-border) 22%, transparent);
+    }
+
+    .vv-growth-shell .col-sm-6:nth-child(odd) .vv-growth-card {
+      border-right: 1px solid color-mix(in srgb, var(--primary-border) 22%, transparent);
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .vv-growth {
+      padding-top: 4.5rem !important;
+      padding-bottom: 4.5rem !important;
+    }
+
+    .vv-growth-title-line-1 {
+      font-size: clamp(1.85rem, 8vw, 2.6rem);
+    }
+
+    .vv-growth-title-line-2 {
+      font-size: clamp(2.15rem, 9vw, 3rem);
+    }
+
+    .vv-growth-intro {
+      max-width: 34ch;
+    }
+
+    .vv-growth-shell {
+      border-radius: 1.4rem !important;
+      padding: .4rem !important;
+    }
+
+    .vv-growth-card {
+      border-radius: 1rem;
+      background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.08));
+    }
+
+    .vv-growth-value {
+      font-size: clamp(2rem, 10vw, 2.8rem);
+    }
+
+    .vv-growth-label {
+      max-width: 19ch;
+      font-size: 1.02rem;
+    }
+
+    .vv-growth-floater {
+      opacity: var(--opacity-mobile, .26);
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .vv-growth-shell {
+      padding: .3rem !important;
+    }
+
+    .vv-growth-card:not(:last-child) {
+      border-bottom: 1px solid color-mix(in srgb, var(--primary-border) 18%, transparent);
+    }
+
+    .vv-growth-value {
+      font-size: clamp(2.1rem, 11vw, 2.75rem);
+    }
+
+    .vv-growth-label {
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vv-growth-title-line {
+      animation: none !important;
+    }
+
+    .vv-growth-floater {
+      animation: none !important;
+      transform: none !important;
+      opacity: .18 !important;
+    }
+
+    .vv-growth-card,
+    .vv-growth-card.is-visible,
+    .vv-growth-card:hover {
+      transform: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const section = document.getElementById('vv-growth');
+    if (!section) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const floaterWrap = section.querySelector('.vv-growth-floaters');
+    const countEls = Array.from(section.querySelectorAll('.vv-growth-value[data-value]'));
+    const cards = Array.from(section.querySelectorAll('.vv-growth-card'));
+
+    const heartSrc = floaterWrap?.querySelector('.vv-growth-floater-1')?.getAttribute('src') || '';
+    const likeSrc = floaterWrap?.querySelector('.vv-growth-floater-2')?.getAttribute('src') || '';
+
+    function randomBetween(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function setFloaterVars(el) {
+      const width = window.innerWidth;
+      const isMobile = width < 768;
+      const isSmallMobile = width < 576;
+      const isTinyMobile = width < 400;
+
+      const sizeMin = isMobile ? 34 : 48;
+      const sizeMax = isMobile ? 78 : 116;
+
+      const opacity = isMobile
+        ? randomBetween(0.24, 0.34)
+        : randomBetween(0.26, 0.38);
+
+      el.style.setProperty('--left', `${randomBetween(2, 96).toFixed(2)}%`);
+      el.style.setProperty('--size', `${randomBetween(sizeMin, sizeMax).toFixed(0)}px`);
+      el.style.setProperty('--duration', `${randomBetween(isMobile ? 26 : 22, isMobile ? 42 : 36).toFixed(2)}s`);
+      el.style.setProperty('--delay', `${randomBetween(-30, 0).toFixed(2)}s`);
+      el.style.setProperty('--opacity', opacity.toFixed(3));
+      el.style.setProperty('--opacity-mobile', Math.max(0.22, opacity - 0.02).toFixed(3));
+
+      el.style.setProperty('--drift-x1', `${randomBetween(-14, 14).toFixed(0)}px`);
+      el.style.setProperty('--drift-x2', `${randomBetween(-22, 22).toFixed(0)}px`);
+      el.style.setProperty('--drift-x3', `${randomBetween(-18, 18).toFixed(0)}px`);
+
+      el.style.setProperty('--rotate-start', `${randomBetween(-12, 12).toFixed(1)}deg`);
+      el.style.setProperty('--rotate-mid', `${randomBetween(-10, 10).toFixed(1)}deg`);
+      el.style.setProperty('--rotate-end', `${randomBetween(-18, 18).toFixed(1)}deg`);
+
+      el.style.setProperty('--scale-start', randomBetween(0.84, 0.96).toFixed(2));
+      el.style.setProperty('--scale-mid', randomBetween(0.96, 1.05).toFixed(2));
+      el.style.setProperty('--scale-end', randomBetween(1.02, 1.12).toFixed(2));
+
+      if (isTinyMobile) {
+        el.style.setProperty('--rise-1', '-62vh');
+        el.style.setProperty('--rise-2', '-122vh');
+        el.style.setProperty('--rise-3', '-182vh');
+      } else if (isSmallMobile) {
+        el.style.setProperty('--rise-1', '-56vh');
+        el.style.setProperty('--rise-2', '-110vh');
+        el.style.setProperty('--rise-3', '-165vh');
+      } else if (isMobile) {
+        el.style.setProperty('--rise-1', '-48vh');
+        el.style.setProperty('--rise-2', '-96vh');
+        el.style.setProperty('--rise-3', '-145vh');
+      } else {
+        el.style.setProperty('--rise-1', '-36vh');
+        el.style.setProperty('--rise-2', '-74vh');
+        el.style.setProperty('--rise-3', '-112vh');
+      }
+    }
+
+    function buildMoreFloaters() {
+      if (!floaterWrap || !heartSrc || !likeSrc || reduceMotion) return;
+
+      const existing = floaterWrap.querySelectorAll('.vv-growth-floater').length;
+      const targetTotal = window.innerWidth < 768 ? 10 : 15;
+      const toCreate = Math.max(0, targetTotal - existing);
+
+      for (let i = 0; i < toCreate; i += 1) {
+        const img = document.createElement('img');
+        img.alt = '';
+        img.className = 'vv-growth-floater';
+        img.src = Math.random() > 0.5 ? heartSrc : likeSrc;
+        floaterWrap.appendChild(img);
+      }
+    }
+
+    function refreshFloaters() {
+      if (!floaterWrap) return;
+
+      const floaters = Array.from(floaterWrap.querySelectorAll('.vv-growth-floater'));
+
+      floaters.forEach((floater, index) => {
+        if (index >= 6 && heartSrc && likeSrc) {
+          floater.src = Math.random() > 0.5 ? heartSrc : likeSrc;
+        }
+
+        setFloaterVars(floater);
+
+        floater.onanimationiteration = () => {
+          if (index >= 6 && heartSrc && likeSrc) {
+            floater.src = Math.random() > 0.5 ? heartSrc : likeSrc;
+          }
+          setFloaterVars(floater);
+        };
+      });
+    }
+
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function formatCount(value, decimals, prefix, suffix) {
+      if (decimals > 0) {
+        return `${prefix}${value.toFixed(decimals)}${suffix}`;
+      }
+      return `${prefix}${Math.round(value).toLocaleString()}${suffix}`;
+    }
+
+    function animateCount(el) {
+      const target = Number(el.dataset.value || 0);
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const decimals = Number(el.dataset.decimals || 0);
+      const duration = 1700;
+      const start = performance.now();
+
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = easeOutCubic(progress);
+        const current = target * eased;
+
+        el.textContent = formatCount(current, decimals, prefix, suffix);
+
+        if (progress < 1) {
+          window.requestAnimationFrame(tick);
+        } else {
+          el.textContent = formatCount(target, decimals, prefix, suffix);
+        }
+      }
+
+      window.requestAnimationFrame(tick);
+    }
+
+    function initRevealAndCounters() {
+      let counted = false;
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+
+          cards.forEach((card, index) => {
+            window.setTimeout(() => {
+              card.classList.add('is-visible');
+            }, reduceMotion ? 0 : index * 120);
+          });
+
+          if (!counted) {
+            counted = true;
+            countEls.forEach(animateCount);
+          }
+
+          obs.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.28
+      });
+
+      observer.observe(section);
+    }
+
+    buildMoreFloaters();
+    refreshFloaters();
+    initRevealAndCounters();
+
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        refreshFloaters();
+      }, 180);
+    });
+  })();
+</script>

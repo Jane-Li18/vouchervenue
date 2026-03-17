@@ -1,0 +1,505 @@
+{% if featured_partner or other_partners %}
+<section class="vv-partners overflow-hidden position-relative" id="vv-partners">
+  <div class="container py-4 py-lg-5 vv-partners-animate">
+    <div class="vv-partners-intro text-center mb-4 mb-lg-5">
+      <div class="vv-partners-eyebrow mb-3">Affiliate Partners</div>
+
+      <h2 class="vv-partners-title-wrap mb-3 mb-lg-4">
+        <span class="vv-partners-title-line vv-partners-title-line-1">Featuring</span>
+        <span class="vv-partners-title-line vv-partners-title-line-2">
+          affiliate <span style="color: var(--tertiary-accent);">partners</span>
+        </span>
+        <span class="vv-partners-title-line vv-partners-title-line-3">with polish, performance, and purpose</span>
+      </h2>
+
+      <p class="vv-partners-lead mb-0 mx-auto">
+        A refined showcase of affiliate partners growing with Voucher Venue through elevated visibility, thoughtful collaboration, and measurable results.
+      </p>
+    </div>
+
+    <div class="d-none" id="vvPartnerSources">
+      {% if featured_partner %}
+      <div
+        class="vv-partner-source"
+        data-name="{{ featured_partner.name }}"
+        data-description="{{ featured_partner.description }}"
+        data-image="{{ featured_partner.image.url }}"
+        data-cta-url="{{ featured_partner.cta_url|default:'' }}"
+        data-cta-label="{{ featured_partner.cta_label|default:'View Partner' }}"
+      >
+        {% for perk in featured_partner.perk_list %}
+        <span data-perk="{{ perk }}"></span>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      {% for partner in other_partners %}
+      <div
+        class="vv-partner-source"
+        data-name="{{ partner.name }}"
+        data-description="{{ partner.description }}"
+        data-image="{{ partner.image.url }}"
+        data-cta-url="{{ partner.cta_url|default:'' }}"
+        data-cta-label="{{ partner.cta_label|default:'View Partner' }}"
+      >
+        {% for perk in partner.perk_list %}
+        <span data-perk="{{ perk }}"></span>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+
+    {% if featured_partner %}
+    <div class="row justify-content-center mb-4 mb-xl-5">
+      <div class="col-12 col-lg-11 col-xl-10">
+        <article class="vv-partner-spotlight vv-partner-reveal position-relative overflow-hidden rounded-5 mx-auto" id="vvPartnerPresenter" style="--vv-delay: .08s;">
+          <div class="row g-0 align-items-stretch">
+            <div class="col-12 col-lg-5">
+              <div class="vv-partner-spotlight-media position-relative">
+                <div class="vv-partner-media-shell d-flex align-items-start align-items-lg-center justify-content-center py-3 py-md-4 py-lg-0 px-3 px-md-4 px-lg-0 vv-partner-presenter-motion">
+                  <div class="w-100">
+                    <div class="row justify-content-center">
+                      <div class="col-8 col-md-5 col-lg-12">
+                        <img
+                          src="{{ featured_partner.image.url }}"
+                          alt="{{ featured_partner.name }}"
+                          class="img-fluid d-block mx-auto vv-partner-image vv-partner-image-spotlight"
+                          id="vvPartnerPresenterImage"
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="vv-partner-spotlight-overlay"></div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-7 d-flex">
+              <div class="w-100 d-flex flex-column justify-content-start align-items-center align-items-lg-start text-center text-lg-start p-3 p-md-4 p-lg-4 vv-partner-spotlight-copy vv-partner-presenter-motion" id="vvPartnerPresenterCopy">
+                <div class="w-100 d-flex flex-column flex-sm-row align-items-center justify-content-between gap-3 mb-3">
+                  <span class="vv-partner-badge">Partner Spotlight</span>
+
+                  <div class="d-flex align-items-center gap-2">
+                    <button type="button" class="vv-partner-nav" id="vvPartnerPrev" aria-label="Previous partner">
+                      <span aria-hidden="true">‹</span>
+                    </button>
+                    <button type="button" class="vv-partner-nav" id="vvPartnerNext" aria-label="Next partner">
+                      <span aria-hidden="true">›</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="w-100 d-flex align-items-center gap-3 mb-4">
+                  <div class="vv-partner-progress flex-grow-1">
+                    <span id="vvPartnerPresenterProgress"></span>
+                  </div>
+
+                  <div class="vv-partner-presenter-count">
+                    <span id="vvPartnerPresenterCurrent">01</span>
+                    <span class="vv-partner-presenter-divider">/</span>
+                    <span id="vvPartnerPresenterTotal">01</span>
+                  </div>
+                </div>
+
+                <h3 class="mb-3" id="vvPartnerPresenterName">{{ featured_partner.name }}</h3>
+
+                <p class="vv-partner-description mb-4" id="vvPartnerPresenterDescription">
+                  {{ featured_partner.description }}
+                </p>
+
+                <div class="w-100 d-flex flex-wrap justify-content-center justify-content-lg-start gap-2 gap-md-3 mb-4" id="vvPartnerPresenterPerks">
+                  {% for perk in featured_partner.perk_list %}
+                  <span class="vv-partner-chip">{{ perk }}</span>
+                  {% endfor %}
+                </div>
+
+                {% if featured_partner.cta_url %}
+                <div class="w-100 d-flex flex-wrap justify-content-center justify-content-lg-start gap-3" id="vvPartnerPresenterCtaWrap">
+                  <a
+                    href="{{ featured_partner.cta_url }}"
+                    class="btn btn-primary px-4"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {{ featured_partner.cta_label|default:"View Partner" }}
+                  </a>
+                </div>
+                {% else %}
+                <div class="w-100 d-flex flex-wrap justify-content-center justify-content-lg-start gap-3" id="vvPartnerPresenterCtaWrap"></div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+    {% else %}
+    {% for partner in other_partners|slice:":1" %}
+    <div class="row mb-4 mb-xl-5">
+      <div class="col-12">
+        <article class="vv-partner-spotlight vv-partner-reveal position-relative overflow-hidden rounded-5" id="vvPartnerPresenter" style="--vv-delay: .08s;">
+          <div class="row g-0 align-items-stretch">
+            <div class="col-12 col-lg-6">
+              <div class="vv-partner-spotlight-media h-100 position-relative">
+                <div class="vv-partner-media-shell h-100 d-flex align-items-center justify-content-center vv-partner-presenter-motion">
+                  <img
+                    src="{{ partner.image.url }}"
+                    alt="{{ partner.name }}"
+                    class="img-fluid d-block mx-auto vv-partner-image vv-partner-image-spotlight"
+                    id="vvPartnerPresenterImage"
+                  >
+                </div>
+                <div class="vv-partner-spotlight-overlay"></div>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-6 d-flex">
+              <div class="w-100 d-flex flex-column justify-content-start align-items-center align-items-lg-start text-center text-lg-start p-3 p-md-4 p-lg-4 vv-partner-spotlight-copy vv-partner-presenter-motion" id="vvPartnerPresenterCopy">
+                <div class="w-100 d-flex flex-column flex-sm-row align-items-center justify-content-between gap-3 mb-3">
+                  <span class="vv-partner-badge">Partner Spotlight</span>
+
+                  <div class="d-flex align-items-center gap-2">
+                    <button type="button" class="vv-partner-nav" id="vvPartnerPrev" aria-label="Previous partner">
+                      <span aria-hidden="true">‹</span>
+                    </button>
+                    <button type="button" class="vv-partner-nav" id="vvPartnerNext" aria-label="Next partner">
+                      <span aria-hidden="true">›</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="w-100 d-flex align-items-center gap-3 mb-4">
+                  <div class="vv-partner-progress flex-grow-1">
+                    <span id="vvPartnerPresenterProgress"></span>
+                  </div>
+
+                  <div class="vv-partner-presenter-count">
+                    <span id="vvPartnerPresenterCurrent">01</span>
+                    <span class="vv-partner-presenter-divider">/</span>
+                    <span id="vvPartnerPresenterTotal">01</span>
+                  </div>
+                </div>
+
+                <h3 class="mb-3" id="vvPartnerPresenterName">{{ partner.name }}</h3>
+
+                <p class="vv-partner-description mb-4" id="vvPartnerPresenterDescription">
+                  {{ partner.description }}
+                </p>
+
+                <div class="w-100 d-flex flex-wrap justify-content-center justify-content-lg-start gap-2 gap-md-3 mb-4" id="vvPartnerPresenterPerks">
+                  {% for perk in partner.perk_list %}
+                  <span class="vv-partner-chip">{{ perk }}</span>
+                  {% endfor %}
+                </div>
+
+                {% if partner.cta_url %}
+                <div class="w-100 d-flex flex-wrap justify-content-center justify-content-lg-start gap-3" id="vvPartnerPresenterCtaWrap">
+                  <a
+                    href="{{ partner.cta_url }}"
+                    class="btn btn-primary px-4"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {{ partner.cta_label|default:"View Partner" }}
+                  </a>
+                </div>
+                {% else %}
+                <div class="w-100 d-flex flex-wrap justify-content-center justify-content-lg-start gap-3" id="vvPartnerPresenterCtaWrap"></div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="vv-partner-selector-shell">
+      <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2 mb-3 px-1 px-md-2">
+        <div class="vv-partner-selector-heading">Browse Partners</div>
+        <div class="vv-partner-selector-subtitle">Click a partner to feature it above</div>
+      </div>
+
+      <div class="vv-partner-selector-scroller overflow-auto pb-2" id="vvPartnerSelectorScroller">
+        <div class="d-flex flex-nowrap align-items-stretch gap-3 gap-md-4 px-1 px-md-2" id="vvPartnerSelectorTrack"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const presenter = document.getElementById('vvPartnerPresenter');
+    const sourceNodes = Array.from(document.querySelectorAll('.vv-partner-source'));
+    const scroller = document.getElementById('vvPartnerSelectorScroller');
+    const selectorTrack = document.getElementById('vvPartnerSelectorTrack');
+
+    if (!presenter || !sourceNodes.length || !scroller || !selectorTrack) return;
+
+    const image = document.getElementById('vvPartnerPresenterImage');
+    const name = document.getElementById('vvPartnerPresenterName');
+    const description = document.getElementById('vvPartnerPresenterDescription');
+    const perks = document.getElementById('vvPartnerPresenterPerks');
+    const ctaWrap = document.getElementById('vvPartnerPresenterCtaWrap');
+    const current = document.getElementById('vvPartnerPresenterCurrent');
+    const total = document.getElementById('vvPartnerPresenterTotal');
+    const progress = document.getElementById('vvPartnerPresenterProgress');
+    const prevBtn = document.getElementById('vvPartnerPrev');
+    const nextBtn = document.getElementById('vvPartnerNext');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const rawSlides = sourceNodes.map((node) => ({
+      name: node.dataset.name || '',
+      description: node.dataset.description || '',
+      image: node.dataset.image || '',
+      ctaUrl: node.dataset.ctaUrl || '',
+      ctaLabel: node.dataset.ctaLabel || 'View Partner',
+      perks: Array.from(node.querySelectorAll('[data-perk]')).map((perk) => perk.dataset.perk || '')
+    }));
+
+    const seen = new Set();
+    const slides = rawSlides.filter((slide) => {
+      const key = `${slide.name}||${slide.image}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
+    const duration = 5000;
+    let activeIndex = 0;
+    let timeoutId = null;
+    let rafId = null;
+    let startTime = 0;
+    let remaining = duration;
+    let paused = false;
+
+    function setProgress(ratio) {
+      if (!progress) return;
+      progress.style.transform = `scaleX(${Math.max(0, Math.min(1, ratio))})`;
+    }
+
+    function clearTimers() {
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+        timeoutId = null;
+      }
+
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    }
+
+    function animateProgress(now) {
+      const elapsed = now - startTime;
+      const done = duration - remaining + elapsed;
+      setProgress(done / duration);
+
+      if (elapsed < remaining && !paused) {
+        rafId = window.requestAnimationFrame(animateProgress);
+      }
+    }
+
+    function scheduleRotation() {
+      if (reduceMotion || slides.length <= 1) {
+        setProgress(slides.length <= 1 ? 1 : 0);
+        return;
+      }
+
+      startTime = performance.now();
+
+      timeoutId = window.setTimeout(() => {
+        goToSlide((activeIndex + 1) % slides.length);
+      }, remaining);
+
+      rafId = window.requestAnimationFrame(animateProgress);
+    }
+
+    function buildPerks(slide) {
+      perks.innerHTML = '';
+
+      (slide.perks || []).forEach((perkText) => {
+        const chip = document.createElement('span');
+        chip.className = 'vv-partner-chip';
+        chip.textContent = perkText;
+        perks.appendChild(chip);
+      });
+    }
+
+    function buildCta(slide) {
+      ctaWrap.innerHTML = '';
+
+      if (!slide.ctaUrl) return;
+
+      const link = document.createElement('a');
+      link.href = slide.ctaUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.className = 'btn btn-primary px-4';
+      link.textContent = slide.ctaLabel || 'View Partner';
+      ctaWrap.appendChild(link);
+    }
+
+    function centerActiveCard() {
+      const activeCard = selectorTrack.querySelector(`.vv-partner-selector-card[data-slide-index="${activeIndex}"]`);
+      if (!activeCard) return;
+
+      const scrollerRect = scroller.getBoundingClientRect();
+      const cardRect = activeCard.getBoundingClientRect();
+      const currentScroll = scroller.scrollLeft;
+
+      const targetLeft =
+        currentScroll +
+        (cardRect.left - scrollerRect.left) -
+        ((scroller.clientWidth / 2) - (activeCard.offsetWidth / 2));
+
+      const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+      const finalLeft = Math.max(0, Math.min(targetLeft, maxScroll));
+
+      scroller.scrollTo({
+        left: finalLeft,
+        behavior: reduceMotion ? 'auto' : 'smooth'
+      });
+    }
+
+    function updateSelectorActive() {
+      selectorTrack.querySelectorAll('.vv-partner-selector-card').forEach((button) => {
+        const isActive = Number(button.dataset.slideIndex) === activeIndex;
+        button.classList.toggle('is-active', isActive);
+      });
+
+      centerActiveCard();
+    }
+
+    function renderSlide(index) {
+      const slide = slides[index];
+      if (!slide) return;
+
+      image.src = slide.image;
+      image.alt = slide.name;
+      name.textContent = slide.name;
+      description.textContent = slide.description;
+
+      buildPerks(slide);
+      buildCta(slide);
+
+      current.textContent = String(index + 1).padStart(2, '0');
+      total.textContent = String(slides.length).padStart(2, '0');
+
+      updateSelectorActive();
+    }
+
+    function startPopIn() {
+      presenter.classList.add('is-entering');
+
+      window.setTimeout(() => {
+        presenter.classList.remove('is-entering');
+      }, 420);
+    }
+
+    function goToSlide(index) {
+      clearTimers();
+      remaining = duration;
+      setProgress(0);
+
+      if (index === activeIndex) {
+        renderSlide(activeIndex);
+
+        if (!paused && !reduceMotion && slides.length > 1) {
+          scheduleRotation();
+        }
+        return;
+      }
+
+      presenter.classList.add('is-switching');
+
+      window.setTimeout(() => {
+        activeIndex = index;
+        renderSlide(activeIndex);
+        presenter.classList.remove('is-switching');
+        startPopIn();
+
+        if (!paused && !reduceMotion && slides.length > 1) {
+          scheduleRotation();
+        }
+      }, 180);
+    }
+
+    function pauseRotation() {
+      if (paused || reduceMotion || slides.length <= 1) return;
+
+      paused = true;
+      const elapsed = performance.now() - startTime;
+      remaining = Math.max(0, remaining - elapsed);
+      clearTimers();
+    }
+
+    function resumeRotation() {
+      if (!paused || reduceMotion || slides.length <= 1) return;
+
+      paused = false;
+
+      if (remaining <= 0) {
+        remaining = duration;
+        setProgress(0);
+      }
+
+      scheduleRotation();
+    }
+
+    function buildSelector() {
+      selectorTrack.innerHTML = '';
+
+      slides.forEach((slide, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'vv-partner-selector-card text-center';
+        button.dataset.slideIndex = index;
+
+        const media = document.createElement('span');
+        media.className = 'vv-partner-selector-media d-flex align-items-center justify-content-center overflow-hidden';
+
+        const mediaImg = document.createElement('img');
+        mediaImg.src = slide.image;
+        mediaImg.alt = slide.name;
+        mediaImg.className = 'vv-partner-selector-image';
+
+        const title = document.createElement('span');
+        title.className = 'vv-partner-selector-name';
+        title.textContent = slide.name;
+
+        media.appendChild(mediaImg);
+        button.appendChild(media);
+        button.appendChild(title);
+
+        button.addEventListener('click', () => {
+          goToSlide(index);
+        });
+
+        selectorTrack.appendChild(button);
+      });
+    }
+
+    buildSelector();
+    renderSlide(activeIndex);
+
+    presenter.addEventListener('mouseenter', pauseRotation);
+    presenter.addEventListener('mouseleave', resumeRotation);
+
+    prevBtn?.addEventListener('click', () => {
+      goToSlide((activeIndex - 1 + slides.length) % slides.length);
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      goToSlide((activeIndex + 1) % slides.length);
+    });
+
+    if (!reduceMotion && slides.length > 1) {
+      scheduleRotation();
+    } else {
+      setProgress(slides.length <= 1 ? 1 : 0);
+    }
+  })();
+</script>
+{% endif %}

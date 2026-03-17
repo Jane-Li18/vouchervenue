@@ -1,0 +1,398 @@
+{% load static %}
+
+<section id="vv-advertisers" class="py-5 py-lg-6">
+  <div class="container">
+    <div class="text-center mb-4 mb-lg-5">
+      <h2 class="vv-advertisers-title mb-0">Advertisers With Us</h2>
+    </div>
+
+    <div
+      id="vvAdvertiserGrid"
+      class="row g-3 g-md-4 justify-content-center vv-ad-animate"
+      data-static-base="{% static 'images/ads/' %}"
+    >
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="vv-ad-card rounded-4 h-100 d-flex align-items-center justify-content-center p-3 p-md-4">
+          <div class="vv-ad-item vv-ad-item-1 d-flex align-items-center justify-content-center w-100">
+            <div class="vv-ad-stage w-100 text-center" data-slot="0" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="vv-ad-card rounded-4 h-100 d-flex align-items-center justify-content-center p-3 p-md-4">
+          <div class="vv-ad-item vv-ad-item-2 d-flex align-items-center justify-content-center w-100">
+            <div class="vv-ad-stage w-100 text-center" data-slot="1" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="vv-ad-card rounded-4 h-100 d-flex align-items-center justify-content-center p-3 p-md-4">
+          <div class="vv-ad-item vv-ad-item-3 d-flex align-items-center justify-content-center w-100">
+            <div class="vv-ad-stage w-100 text-center" data-slot="2" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #vv-advertisers {
+    background:
+      radial-gradient(circle at top center, color-mix(in srgb, var(--primary-accent) 10%, white 90%) 0%, transparent 32%),
+      linear-gradient(180deg, #ffffff 0%, #fbfbfb 100%);
+  }
+
+  .vv-advertisers-title {
+    color: var(--secondary-accent);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -.02em;
+  }
+
+  .vv-ad-card {
+    min-height: 190px;
+    background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(255,255,255,.92));
+    border: 1px solid color-mix(in srgb, var(--primary-accent) 12%, white 88%);
+    box-shadow:
+      0 20px 44px rgba(15, 23, 42, .05),
+      0 8px 18px rgba(15, 23, 42, .035);
+    overflow: hidden;
+    transition:
+      transform .28s ease,
+      box-shadow .28s ease,
+      border-color .28s ease;
+  }
+
+  .vv-ad-card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 24px 52px rgba(15, 23, 42, .07),
+      0 10px 22px rgba(15, 23, 42, .045);
+    border-color: color-mix(in srgb, var(--primary-accent) 18%, white 82%);
+  }
+
+  .vv-ad-item {
+    min-height: 118px;
+    width: 100%;
+    opacity: 0;
+    transform: scale(.82);
+    transform-origin: center center;
+    will-change: transform, opacity;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .vv-ad-stage {
+    min-height: 118px;
+    width: 100%;
+  }
+
+  .vv-ad-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 118px;
+    width: 100%;
+  }
+
+  .vv-ad-brand-media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 90px;
+    transition:
+      opacity .22s ease,
+      transform .22s ease,
+      filter .22s ease;
+    transform-origin: center center;
+  }
+
+  .vv-ad-logo {
+    display: block;
+    width: auto;
+    max-width: min(100%, 320px);
+    max-height: 82px;
+    object-fit: contain;
+    opacity: 1;
+    filter: none;
+  }
+
+  .vv-ad-animate.is-visible .vv-ad-item {
+    animation-duration: .82s;
+    animation-timing-function: cubic-bezier(.22, .61, .36, 1);
+    animation-fill-mode: forwards;
+  }
+
+  .vv-ad-animate.is-visible .vv-ad-item-1 {
+    animation-name: vvAdPopIn;
+    animation-delay: .06s;
+  }
+
+  .vv-ad-animate.is-visible .vv-ad-item-2 {
+    animation-name: vvAdPopIn;
+    animation-delay: .18s;
+  }
+
+  .vv-ad-animate.is-visible .vv-ad-item-3 {
+    animation-name: vvAdPopIn;
+    animation-delay: .30s;
+  }
+
+  .vv-ad-item.is-swapping {
+    transform: scale(1.08);
+  }
+
+  .vv-ad-item.is-swapping .vv-ad-brand-media {
+    opacity: 0;
+    transform: scale(.8);
+    filter: blur(2px);
+  }
+
+  .vv-ad-item.is-reentering {
+    animation: vvAdPopIn .56s cubic-bezier(.22, .61, .36, 1);
+  }
+
+  @keyframes vvAdPopIn {
+    0% {
+      opacity: 0;
+      transform: scale(.78);
+    }
+    65% {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @media (max-width: 991.98px) {
+    .vv-ad-card {
+      min-height: 172px;
+    }
+
+    .vv-ad-item,
+    .vv-ad-stage,
+    .vv-ad-brand {
+      min-height: 102px;
+    }
+
+    .vv-ad-logo {
+      max-height: 68px;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .vv-advertisers-title {
+      font-size: clamp(1.9rem, 7vw, 2.45rem);
+    }
+
+    .vv-ad-card {
+      min-height: 152px;
+      border-radius: 1.1rem !important;
+    }
+
+    .vv-ad-item,
+    .vv-ad-stage,
+    .vv-ad-brand {
+      min-height: 88px;
+    }
+
+    .vv-ad-logo {
+      max-width: min(100%, 250px);
+      max-height: 58px;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .vv-ad-card {
+      min-height: 136px;
+      padding: 1rem !important;
+    }
+
+    .vv-ad-item,
+    .vv-ad-stage,
+    .vv-ad-brand {
+      min-height: 78px;
+    }
+
+    .vv-ad-logo {
+      max-width: min(100%, 220px);
+      max-height: 52px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vv-ad-item,
+    .vv-ad-brand-media {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+      transition: none !important;
+      filter: none !important;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const grid = document.getElementById('vvAdvertiserGrid');
+    if (!grid) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const staticBase = grid.dataset.staticBase || '';
+    const items = Array.from(grid.querySelectorAll('.vv-ad-item'));
+    const stages = Array.from(grid.querySelectorAll('.vv-ad-stage'));
+
+    const brands = [
+      { name: 'TEMU', file: 'temu.webp' },
+      { name: 'AliExpress', file: 'ali-express.webp' },
+      { name: 'TikTok Shop', file: 'tiktok-shop.webp' },
+      { name: 'Shopee', file: 'shopee.webp' },
+      { name: 'Lazada', file: 'lazada.webp' },
+      { name: 'SHEIN', file: 'shein.webp' },
+      { name: 'Agoda', file: 'agoda.webp' },
+      { name: 'Trip.com', file: 'trip-com.webp' },
+      { name: 'Booking.com', file: 'booking-com.webp' },
+      { name: 'eBay', file: 'ebay.webp' },
+      { name: 'Amazon', file: 'amazon.webp' }
+    ];
+
+    const state = [0, 1, 2];
+    let brandCursor = 3;
+    let activeSlot = 0;
+    let rotateTimer = null;
+
+    function buildBrandMarkup(brand) {
+      const src = `${staticBase}${brand.file}`;
+      return `
+        <div class="vv-ad-brand" aria-label="${brand.name}">
+          <div class="vv-ad-brand-media">
+            <img
+              class="vv-ad-logo"
+              src="${src}"
+              alt="${brand.name}"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+        </div>
+      `;
+    }
+
+    function preloadImage(src) {
+      const img = new Image();
+      img.src = src;
+    }
+
+    function renderSlot(slotIndex, brandIndex) {
+      const stage = stages[slotIndex];
+      if (!stage) return;
+      stage.innerHTML = buildBrandMarkup(brands[brandIndex]);
+    }
+
+    function setInitialBrands() {
+      state.forEach((brandIndex, slotIndex) => {
+        renderSlot(slotIndex, brandIndex);
+      });
+    }
+
+    function getNextBrandIndex(excluding) {
+      let attempts = 0;
+
+      while (attempts < brands.length * 2) {
+        const candidate = brandCursor % brands.length;
+        brandCursor += 1;
+
+        if (!excluding.includes(candidate)) return candidate;
+        attempts += 1;
+      }
+
+      return brandCursor++ % brands.length;
+    }
+
+    function restartPopIn(item) {
+      item.classList.remove('is-reentering');
+      void item.offsetWidth;
+      item.classList.add('is-reentering');
+
+      window.setTimeout(() => {
+        item.classList.remove('is-reentering');
+      }, 580);
+    }
+
+    function swapItem(slotIndex) {
+      const item = items[slotIndex];
+      if (!item) return;
+
+      const nextIndex = getNextBrandIndex(state.filter((_, i) => i !== slotIndex));
+      const nextBrand = brands[nextIndex];
+      preloadImage(`${staticBase}${nextBrand.file}`);
+
+      if (reduceMotion) {
+        state[slotIndex] = nextIndex;
+        renderSlot(slotIndex, nextIndex);
+        return;
+      }
+
+      item.classList.remove('is-reentering');
+      item.classList.add('is-swapping');
+
+      window.setTimeout(() => {
+        state[slotIndex] = nextIndex;
+        renderSlot(slotIndex, nextIndex);
+      }, 180);
+
+      window.setTimeout(() => {
+        item.classList.remove('is-swapping');
+        restartPopIn(item);
+      }, 430);
+    }
+
+    function startRotation() {
+      if (rotateTimer || !items.length) return;
+
+      rotateTimer = window.setInterval(() => {
+        swapItem(activeSlot);
+        activeSlot = (activeSlot + 1) % items.length;
+      }, 1700);
+    }
+
+    function init() {
+      brands.forEach(brand => preloadImage(`${staticBase}${brand.file}`));
+      setInitialBrands();
+
+      if (reduceMotion) {
+        grid.classList.add('is-visible');
+        startRotation();
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+
+          grid.classList.add('is-visible');
+
+          window.setTimeout(() => {
+            startRotation();
+          }, 950);
+
+          obs.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.22
+      });
+
+      observer.observe(grid);
+    }
+
+    init();
+  })();
+</script>

@@ -1,0 +1,392 @@
+{% load static %}
+
+<style>.vv-pop-strip {
+  background: var(--primary-accent);
+  border-top: 1px solid rgba(255, 255, 255, .14);
+  border-bottom: 1px solid rgba(255, 255, 255, .14);
+  overflow: hidden;
+  padding-top: .4rem;
+}
+
+.vv-pop-bar {
+  min-height: 7rem;
+  background: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.vv-pop-rail {
+  min-height: 100%;
+  align-items: stretch;
+}
+
+.vv-pop-item-wrap {
+  display: flex;
+}
+
+.vv-pop-item {
+  min-height: 100%;
+  width: 100%;
+  padding: 1.35rem 1.15rem;
+  border-right: 1px solid rgba(255, 255, 255, .14);
+  background: rgba(255, 255, 255, .08);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform .28s ease;
+  opacity: 0;
+  transform: scale(.82);
+  transform-origin: center center;
+  will-change: transform, opacity;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.vv-pop-item-wrap:last-child .vv-pop-item {
+  border-right: 0;
+}
+
+.vv-pop-copy {
+  display: block;
+  font-size: var(--font-size-body-sm);
+  line-height: 1.35;
+  color: var(--primary-bg);
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  transition:
+    opacity .22s ease,
+    transform .22s ease,
+    color .22s ease;
+  transform-origin: center center;
+  max-width: 16rem;
+  margin: 0 auto;
+}
+
+.vv-pop-animate.is-visible .vv-pop-item {
+  animation-duration: .82s;
+  animation-timing-function: cubic-bezier(.22, .61, .36, 1);
+  animation-fill-mode: forwards;
+}
+
+.vv-pop-animate.is-visible .vv-pop-item-1 {
+  animation-name: vvPopStripIn;
+  animation-delay: .06s;
+}
+
+.vv-pop-animate.is-visible .vv-pop-item-2 {
+  animation-name: vvPopStripIn;
+  animation-delay: .18s;
+}
+
+.vv-pop-animate.is-visible .vv-pop-item-3 {
+  animation-name: vvPopStripIn;
+  animation-delay: .30s;
+}
+
+.vv-pop-animate.is-visible .vv-pop-item-4 {
+  animation-name: vvPopStripIn;
+  animation-delay: .42s;
+}
+
+.vv-pop-item.is-swapping {
+  transform: scale(1.08);
+}
+
+.vv-pop-item.is-swapping .vv-pop-copy {
+  opacity: 0;
+  transform: scale(.8);
+  color: var(--primary-bg);
+}
+
+@keyframes vvPopStripIn {
+  0% {
+    opacity: 0;
+    transform: scale(.78);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (min-width: 992px) {
+  .vv-pop-item {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .vv-pop-bar {
+    min-height: auto;
+  }
+
+  .vv-pop-item-wrap:nth-child(2n) .vv-pop-item {
+    border-right: 0;
+  }
+
+  .vv-pop-item {
+    min-height: 5.4rem;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .vv-pop-strip {
+    background: var(--primary-accent);
+    padding-top: 0;
+  }
+
+  .vv-pop-bar {
+    min-height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scroll-padding-left: 50%;
+    scroll-padding-right: 50%;
+  }
+
+  .vv-pop-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .vv-pop-rail {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    min-width: 100%;
+    min-height: auto;
+  }
+
+  .vv-pop-item-wrap {
+    display: flex;
+    width: auto;
+    flex: 0 0 78vw;
+    max-width: 78vw;
+    scroll-snap-align: center;
+  }
+
+  .vv-pop-item-wrap:last-child .vv-pop-item {
+    border-right: 1px solid rgba(255, 255, 255, .14);
+  }
+
+  .vv-pop-item {
+    min-height: 4.9rem;
+    border-right: 1px solid rgba(255, 255, 255, .14);
+    border-bottom: 0;
+    padding: .95rem 1rem;
+    background: rgba(255, 255, 255, .08);
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .vv-pop-copy {
+    font-size: .84rem;
+    letter-spacing: .03em;
+    line-height: 1.4;
+    max-width: none;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .vv-pop-item-wrap {
+    flex: 0 0 86vw;
+    max-width: 86vw;
+  }
+
+  .vv-pop-item {
+    min-height: 4.6rem;
+    padding: .9rem .95rem;
+  }
+
+  .vv-pop-copy {
+    font-size: .8rem;
+    line-height: 1.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vv-pop-item,
+  .vv-pop-copy {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}
+</style>
+
+<section id="vv-pop" class="vv-pop-strip position-relative">
+  <div class="container-fluid px-0">
+    <div class="vv-pop-bar vv-pop-animate">
+      <div class="vv-pop-rail row g-0 h-100 w-100">
+        <div class="col-12 col-sm-6 col-xl-3 vv-pop-item-wrap">
+          <div class="vv-pop-item vv-pop-item-1 d-flex gap-3 w-100">
+            <span class="vv-pop-copy" data-slot="0">We value trusted affiliate relationships</span>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3 vv-pop-item-wrap">
+          <div class="vv-pop-item vv-pop-item-2 d-flex gap-3 w-100">
+            <span class="vv-pop-copy" data-slot="1">Built with care for every partner</span>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3 vv-pop-item-wrap">
+          <div class="vv-pop-item vv-pop-item-3 d-flex gap-3 w-100">
+            <span class="vv-pop-copy" data-slot="2">Trust is at the heart of our growth</span>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3 vv-pop-item-wrap">
+          <div class="vv-pop-item vv-pop-item-4 d-flex gap-3 w-100">
+            <span class="vv-pop-copy" data-slot="3">Partners grow stronger with us</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const popSection = document.querySelector('.vv-pop-animate');
+    if (!popSection) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const mobileMq = window.matchMedia('(max-width: 767.98px)');
+
+    const bar = popSection.closest('.vv-pop-bar');
+    const itemWraps = Array.from(popSection.querySelectorAll('.vv-pop-item-wrap'));
+    const items = Array.from(popSection.querySelectorAll('.vv-pop-item'));
+    const copies = Array.from(popSection.querySelectorAll('.vv-pop-copy'));
+
+    const trustLines = [
+      'We value trusted affiliate relationships',
+      'Built with care for every partner',
+      'Trust is at the heart of our growth',
+      'Partners grow stronger with us',
+      'Meaningful support for every affiliate',
+      'We grow through trusted partnerships',
+      'A more genuine path to affiliate growth',
+      'Every partner deserves trusted support',
+      'Built on respect, trust, and results',
+      'Real partnership creates lasting value',
+      'We champion credible affiliate growth',
+      'Support that helps partners thrive',
+      'Trusted connections create better outcomes',
+      'Growth feels stronger when trust leads',
+      'Affiliate success begins with real trust',
+      'A trusted space for lasting partnerships'
+    ];
+
+    let rotateTimer = null;
+    let activeItem = 0;
+    let nextLineIndex = 0;
+
+    function setInitialLines() {
+      const startIndex = Math.floor(Math.random() * trustLines.length);
+
+      copies.forEach((copy, index) => {
+        copy.textContent = trustLines[(startIndex + index) % trustLines.length];
+      });
+
+      nextLineIndex = (startIndex + copies.length) % trustLines.length;
+    }
+
+    function swapItem(item, textEl) {
+      item.classList.add('is-swapping');
+
+      window.setTimeout(() => {
+        textEl.textContent = trustLines[nextLineIndex];
+        nextLineIndex = (nextLineIndex + 1) % trustLines.length;
+      }, 180);
+
+      window.setTimeout(() => {
+        item.classList.remove('is-swapping');
+      }, 430);
+    }
+
+    function moveStripTo(index, instant = false) {
+      if (!bar || !mobileMq.matches || !itemWraps[index]) return;
+
+      const target = itemWraps[index];
+      const maxScroll = bar.scrollWidth - bar.clientWidth;
+
+      let left = target.offsetLeft - ((bar.clientWidth - target.clientWidth) / 2);
+      left = Math.max(0, Math.min(left, maxScroll));
+
+      bar.scrollTo({
+        left,
+        behavior: instant ? 'auto' : 'smooth'
+      });
+    }
+
+    function startRotation() {
+      if (rotateTimer || !items.length || !copies.length) return;
+
+      rotateTimer = window.setInterval(() => {
+        swapItem(items[activeItem], copies[activeItem]);
+        moveStripTo(activeItem);
+
+        activeItem = (activeItem + 1) % items.length;
+      }, 1450);
+    }
+
+    function syncOnResize() {
+      if (!bar) return;
+
+      if (!mobileMq.matches) {
+        bar.scrollTo({ left: 0, behavior: 'auto' });
+      } else {
+        const currentIndex = activeItem === 0 ? 0 : activeItem - 1;
+        moveStripTo(currentIndex, true);
+      }
+    }
+
+    setInitialLines();
+
+    if (reduceMotion) {
+      popSection.classList.add('is-visible');
+      moveStripTo(0, true);
+      startRotation();
+      mobileMq.addEventListener?.('change', syncOnResize);
+      window.addEventListener('resize', syncOnResize);
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        popSection.classList.add('is-visible');
+        moveStripTo(0, true);
+
+        window.setTimeout(() => {
+          startRotation();
+        }, 900);
+
+        obs.unobserve(entry.target);
+      });
+    }, {
+      threshold: 0.22
+    });
+
+    observer.observe(popSection);
+
+    mobileMq.addEventListener?.('change', syncOnResize);
+    window.addEventListener('resize', syncOnResize);
+  })();
+</script>

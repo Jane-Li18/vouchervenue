@@ -1,0 +1,34 @@
+<div
+  id="global-loader"
+  class="position-fixed top-0 start-0 w-100 vh-100 d-flex justify-content-center align-items-center"
+  role="status"
+  aria-label="Loading"
+>
+  <div class="vv-loader-shell d-flex justify-content-center align-items-center">
+    <div class="vv-loader">
+      <div class="vv-loader-dot"></div>
+      <div class="vv-loader-traveler"></div>
+    </div>
+  </div>
+
+  <svg
+    width="0"
+    height="0"
+    class="vv-loader-filter position-absolute"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <defs>
+      <filter id="uib-jelly-triangle-ooze">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3.333" result="blur" />
+        <feColorMatrix
+          in="blur"
+          mode="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+          result="ooze"
+        />
+        <feBlend in="SourceGraphic" in2="ooze" />
+      </filter>
+    </defs>
+  </svg>
+</div>

@@ -1,0 +1,253 @@
+{% load static %}
+
+<style>
+  .vv-navbar-shell {
+    z-index: 1030;
+  }
+
+  .vv-navbar-wrap {
+    max-width: 1240px;
+  }
+
+  .vv-navbar-glass {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(255, 255, 255, .34), rgba(255, 255, 255, .14));
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, .78);
+    box-shadow:
+      0 10px 30px rgba(28, 28, 28, .08),
+      inset 0 1px 0 rgba(255, 255, 255, .82),
+      inset 0 -1px 0 rgba(255, 255, 255, .18);
+  }
+
+  .vv-navbar-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, .42) 0%,
+      rgba(255, 255, 255, .2) 22%,
+      rgba(255, 255, 255, .08) 45%,
+      rgba(255, 255, 255, .02) 100%
+    );
+    pointer-events: none;
+  }
+
+  .vv-navbar-glass::after {
+    content: "";
+    position: absolute;
+    top: -35%;
+    left: -18%;
+    width: 34%;
+    height: 170%;
+    border-radius: 999px;
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, .08) 20%,
+      rgba(255, 255, 255, .42) 48%,
+      rgba(255, 255, 255, .12) 72%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-22deg);
+    filter: blur(2px);
+    opacity: .95;
+    pointer-events: none;
+    animation: vv-navbar-shine 7s ease-in-out infinite;
+  }
+
+  .vv-navbar-glass > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .vv-navbar-badge {
+    width: 2.85rem;
+    height: 2.85rem;
+    background: rgba(255, 255, 255, .9);
+    box-shadow:
+      0 8px 20px rgba(28, 28, 28, .06),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
+
+  .vv-navbar-badge img {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+  }
+
+  .vv-navbar .nav-link {
+    color: var(--primary-text);
+    font-size: var(--font-size-body-sm);
+    font-weight: 400;
+    line-height: 1;
+    padding: .65rem .9rem;
+    transition: color var(--transition-fast);
+  }
+
+  .vv-navbar .nav-link:hover,
+  .vv-navbar .nav-link:focus,
+  .vv-navbar .nav-link.active {
+    color: var(--tertiary-accent);
+  }
+
+  .vv-navbar .navbar-toggler {
+    width: 2.85rem;
+    height: 2.85rem;
+    border: 1px solid rgba(255, 255, 255, .78);
+    background: rgba(255, 255, 255, .32);
+    box-shadow: none;
+  }
+
+  .vv-navbar .navbar-toggler:focus {
+    box-shadow: none;
+  }
+
+  .vv-navbar-toggler-icon {
+    width: 1.2rem;
+    height: 1rem;
+  }
+
+  .vv-navbar-toggler-icon span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: 999px;
+    background: var(--primary-text);
+    transition: var(--transition-normal);
+  }
+
+  .vv-navbar-toggler-icon span:nth-child(1) {
+    top: 0;
+  }
+
+  .vv-navbar-toggler-icon span:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .vv-navbar-toggler-icon span:nth-child(3) {
+    bottom: 0;
+  }
+
+  .vv-navbar .navbar-toggler[aria-expanded="true"] .vv-navbar-toggler-icon span:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  .vv-navbar .navbar-toggler[aria-expanded="true"] .vv-navbar-toggler-icon span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .vv-navbar .navbar-toggler[aria-expanded="true"] .vv-navbar-toggler-icon span:nth-child(3) {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+  }
+
+  .vv-navbar-cta {
+    background: rgba(255, 255, 255, .52);
+    border: 1px solid rgba(255, 255, 255, .82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .vv-navbar-cta:hover,
+  .vv-navbar-cta:focus {
+    background: var(--secondary-accent);
+    color: var(--tertiary-text) !important;
+    border-color: var(--secondary-accent);
+  }
+
+  @keyframes vv-navbar-shine {
+    0% {
+      left: -22%;
+      opacity: 0;
+    }
+    10% {
+      opacity: .95;
+    }
+    45% {
+      opacity: .95;
+    }
+    100% {
+      left: 108%;
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vv-navbar-glass::after {
+      animation: none;
+      left: 18%;
+      opacity: .7;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    .vv-navbar-glass {
+      border-radius: 0 0 1.5rem 1.5rem !important;
+    }
+
+    .vv-navbar-collapse {
+      padding-top: .9rem;
+      padding-bottom: .15rem;
+    }
+
+    .vv-navbar-badge {
+      width: 2.7rem;
+      height: 2.7rem;
+    }
+
+    .vv-navbar-badge img {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+  }
+</style>
+
+<nav class="vv-navbar-shell position-fixed top-0 start-0 w-100">
+  <div class="vv-navbar-wrap mx-auto px-3 px-md-4 px-xl-0">
+    <div class="vv-navbar-glass rounded-pill mt-0 mt-md-4">
+      <div class="container-fluid px-3 px-md-4">
+        <div class="navbar navbar-expand-md vv-navbar p-0 py-1">
+          <a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center gap-2 me-2 me-md-3 flex-shrink-0">
+            <span class="vv-navbar-badge rounded-circle d-inline-flex align-items-center justify-content-center">
+              <img src="{% static 'favicon.png' %}" alt="Voucher Venue">
+            </span>
+          </a>
+
+          <button class="navbar-toggler rounded-circle ms-auto d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#vvNavbar" aria-controls="vvNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="vv-navbar-toggler-icon d-block position-relative">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </button>
+
+          <div class="collapse navbar-collapse vv-navbar-collapse" id="vvNavbar">
+            <ul class="navbar-nav mx-auto align-items-md-center text-center gap-md-1">
+              <li class="nav-item">
+                <a class="nav-link active" href="{% url 'home' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#vv-about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#vv-partners">Partners</a>
+              </li>
+            </ul>
+
+            {% comment %} <div class="d-flex justify-content-center justify-content-md-end ms-md-3">
+              <a href="#" class="btn vv-navbar-cta px-3 px-md-4 py-2 w-100 w-md-auto">Partners</a>
+            </div> {% endcomment %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

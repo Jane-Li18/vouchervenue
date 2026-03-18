@@ -16,7 +16,7 @@ DEBUG = env_bool("DJANGO_DEBUG", True)
 
 ALLOWED_HOSTS = [
     "www.vouchervenue.com",
-    "vouchervenue.com","localhost:8000",
+    "vouchervenue.com","localhost",
 ]
 
 

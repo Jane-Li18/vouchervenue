@@ -7,7 +7,7 @@
       <h2 class="vv-partners-title-wrap mb-3 mb-lg-4">
         <span class="vv-partners-title-line vv-partners-title-line-1">Featuring</span>
         <span class="vv-partners-title-line vv-partners-title-line-2">
-          affiliate <span style="color: var(--tertiary-accent);">partners</span>
+          affiliate <span class="text-tertiary-accent">partners</span>
         </span>
         <span class="vv-partners-title-line vv-partners-title-line-3">with polish, performance, and purpose</span>
       </h2>
@@ -24,8 +24,9 @@
         data-name="{{ featured_partner.name }}"
         data-description="{{ featured_partner.description }}"
         data-image="{{ featured_partner.image.url }}"
-        data-cta-url="{{ featured_partner.cta_url|default:'' }}"
+        data-cta-url="{{ featured_partner.website_url|default:featured_partner.cta_url|default:'' }}"
         data-cta-label="{{ featured_partner.cta_label|default:'View Partner' }}"
+        data-detail-url="{{ featured_partner.get_absolute_url }}"
       >
         {% for perk in featured_partner.perk_list %}
         <span data-perk="{{ perk }}"></span>
@@ -39,8 +40,9 @@
         data-name="{{ partner.name }}"
         data-description="{{ partner.description }}"
         data-image="{{ partner.image.url }}"
-        data-cta-url="{{ partner.cta_url|default:'' }}"
+        data-cta-url="{{ partner.website_url|default:partner.cta_url|default:'' }}"
         data-cta-label="{{ partner.cta_label|default:'View Partner' }}"
+        data-detail-url="{{ partner.get_absolute_url }}"
       >
         {% for perk in partner.perk_list %}
         <span data-perk="{{ perk }}"></span>
@@ -52,7 +54,7 @@
     {% if featured_partner %}
     <div class="row justify-content-center mb-4 mb-xl-5">
       <div class="col-12 col-lg-11 col-xl-10">
-        <article class="vv-partner-spotlight vv-partner-reveal position-relative overflow-hidden rounded-5 mx-auto" id="vvPartnerPresenter" style="--vv-delay: .08s;">
+        <article class="vv-partner-spotlight vv-partner-reveal vv-partner-reveal-delay-1 position-relative overflow-hidden rounded-5 mx-auto" id="vvPartnerPresenter">
           <div class="row g-0 align-items-stretch">
             <div class="col-12 col-lg-5">
               <div class="vv-partner-spotlight-media position-relative">
@@ -109,24 +111,38 @@
 
                 <div class="w-100 d-flex flex-wrap justify-content-center justify-content-lg-start gap-2 gap-md-3 mb-4" id="vvPartnerPresenterPerks">
                   {% for perk in featured_partner.perk_list %}
-                  <span class="vv-partner-chip">{{ perk }}</span>
+                  <span class="vv-partner-chip rounded-pill">{{ perk }}</span>
                   {% endfor %}
                 </div>
 
-                {% if featured_partner.cta_url %}
-                <div class="w-100 d-flex flex-wrap justify-content-center justify-content-lg-start gap-3" id="vvPartnerPresenterCtaWrap">
+                <div class="w-100 d-flex flex-wrap justify-content-center justify-content-lg-start gap-2 gap-md-3" id="vvPartnerPresenterCtaWrap">
+                  {% if featured_partner.website_url or featured_partner.cta_url %}
                   <a
-                    href="{{ featured_partner.cta_url }}"
-                    class="btn btn-primary px-4"
+                    href="{{ featured_partner.website_url|default:featured_partner.cta_url }}"
+                    class="btn btn-primary px-4 vv-partner-action-btn"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {{ featured_partner.cta_label|default:"View Partner" }}
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M14 5H19V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M10 14L19 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M19 14V18C19 18.5304 18.7893 19.0391 18.4142 19.4142C18.0391 19.7893 17.5304 20 17 20H6C5.46957 20 4.96086 19.7893 4.58579 19.4142C4.21071 19.0391 4 18.5304 4 18V7C4 6.46957 4.21071 5.96086 4.58579 5.58579C4.96086 5.21071 5.46957 5 6 5H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>{{ featured_partner.cta_label|default:"View Partner" }}</span>
+                  </a>
+                  {% endif %}
+
+                  <a
+                    href="{{ featured_partner.get_absolute_url }}"
+                    class="btn btn-outline-dark px-4 vv-partner-action-btn"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M2 12C3.73 7.61 7.52 5 12 5C16.48 5 20.27 7.61 22 12C20.27 16.39 16.48 19 12 19C7.52 19 3.73 16.39 2 12Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>See partner</span>
                   </a>
                 </div>
-                {% else %}
-                <div class="w-100 d-flex flex-wrap justify-content-center justify-content-lg-start gap-3" id="vvPartnerPresenterCtaWrap"></div>
-                {% endif %}
               </div>
             </div>
           </div>
@@ -137,7 +153,7 @@
     {% for partner in other_partners|slice:":1" %}
     <div class="row mb-4 mb-xl-5">
       <div class="col-12">
-        <article class="vv-partner-spotlight vv-partner-reveal position-relative overflow-hidden rounded-5" id="vvPartnerPresenter" style="--vv-delay: .08s;">
+        <article class="vv-partner-spotlight vv-partner-reveal vv-partner-reveal-delay-1 position-relative overflow-hidden rounded-5" id="vvPartnerPresenter">
           <div class="row g-0 align-items-stretch">
             <div class="col-12 col-lg-6">
               <div class="vv-partner-spotlight-media h-100 position-relative">
@@ -188,24 +204,38 @@
 
                 <div class="w-100 d-flex flex-wrap justify-content-center justify-content-lg-start gap-2 gap-md-3 mb-4" id="vvPartnerPresenterPerks">
                   {% for perk in partner.perk_list %}
-                  <span class="vv-partner-chip">{{ perk }}</span>
+                  <span class="vv-partner-chip rounded-pill">{{ perk }}</span>
                   {% endfor %}
                 </div>
 
-                {% if partner.cta_url %}
-                <div class="w-100 d-flex flex-wrap justify-content-center justify-content-lg-start gap-3" id="vvPartnerPresenterCtaWrap">
+                <div class="w-100 d-flex flex-wrap justify-content-center justify-content-lg-start gap-2 gap-md-3" id="vvPartnerPresenterCtaWrap">
+                  {% if partner.website_url or partner.cta_url %}
                   <a
-                    href="{{ partner.cta_url }}"
-                    class="btn btn-primary px-4"
+                    href="{{ partner.website_url|default:partner.cta_url }}"
+                    class="btn btn-primary px-4 vv-partner-action-btn"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {{ partner.cta_label|default:"View Partner" }}
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M14 5H19V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M10 14L19 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M19 14V18C19 18.5304 18.7893 19.0391 18.4142 19.4142C18.0391 19.7893 17.5304 20 17 20H6C5.46957 20 4.96086 19.7893 4.58579 19.4142C4.21071 19.0391 4 18.5304 4 18V7C4 6.46957 4.21071 5.96086 4.58579 5.58579C4.96086 5.21071 5.46957 5 6 5H10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>{{ partner.cta_label|default:"View Partner" }}</span>
+                  </a>
+                  {% endif %}
+
+                  <a
+                    href="{{ partner.get_absolute_url }}"
+                    class="btn btn-outline-dark px-4 vv-partner-action-btn"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M2 12C3.73 7.61 7.52 5 12 5C16.48 5 20.27 7.61 22 12C20.27 16.39 16.48 19 12 19C7.52 19 3.73 16.39 2 12Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>See partner</span>
                   </a>
                 </div>
-                {% else %}
-                <div class="w-100 d-flex flex-wrap justify-content-center justify-content-lg-start gap-3" id="vvPartnerPresenterCtaWrap"></div>
-                {% endif %}
               </div>
             </div>
           </div>
@@ -216,9 +246,32 @@
     {% endif %}
 
     <div class="vv-partner-selector-shell">
-      <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2 mb-3 px-1 px-md-2">
-        <div class="vv-partner-selector-heading">Browse Partners</div>
-        <div class="vv-partner-selector-subtitle">Click a partner to feature it above</div>
+      <div class="d-flex flex-column flex-lg-row align-items-lg-center justify-content-between gap-3 mb-3 px-1 px-md-2">
+        <div>
+          <div class="vv-partner-selector-heading">Browse Partners</div>
+          <div class="vv-partner-selector-subtitle">Click a partner to feature it above</div>
+        </div>
+
+        <div class="vv-partner-search-wrap">
+          <label for="vvPartnerSearch" class="visually-hidden">Search partners</label>
+          <span class="vv-partner-search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11 18C14.866 18 18 14.866 18 11C18 7.13401 14.866 4 11 4C7.13401 4 4 7.13401 4 11C4 14.866 7.13401 18 11 18Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <input
+            type="search"
+            id="vvPartnerSearch"
+            class="form-control vv-partner-search-input"
+            placeholder="Search partners by name..."
+            autocomplete="off"
+          >
+        </div>
+      </div>
+
+      <div id="vvPartnerSearchEmpty" class="small px-1 px-md-2 mb-3 d-none vv-partner-search-empty">
+        No partner matched your search.
       </div>
 
       <div class="vv-partner-selector-scroller overflow-auto pb-2" id="vvPartnerSelectorScroller">
@@ -227,279 +280,4 @@
     </div>
   </div>
 </section>
-
-<script>
-  (() => {
-    const presenter = document.getElementById('vvPartnerPresenter');
-    const sourceNodes = Array.from(document.querySelectorAll('.vv-partner-source'));
-    const scroller = document.getElementById('vvPartnerSelectorScroller');
-    const selectorTrack = document.getElementById('vvPartnerSelectorTrack');
-
-    if (!presenter || !sourceNodes.length || !scroller || !selectorTrack) return;
-
-    const image = document.getElementById('vvPartnerPresenterImage');
-    const name = document.getElementById('vvPartnerPresenterName');
-    const description = document.getElementById('vvPartnerPresenterDescription');
-    const perks = document.getElementById('vvPartnerPresenterPerks');
-    const ctaWrap = document.getElementById('vvPartnerPresenterCtaWrap');
-    const current = document.getElementById('vvPartnerPresenterCurrent');
-    const total = document.getElementById('vvPartnerPresenterTotal');
-    const progress = document.getElementById('vvPartnerPresenterProgress');
-    const prevBtn = document.getElementById('vvPartnerPrev');
-    const nextBtn = document.getElementById('vvPartnerNext');
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const rawSlides = sourceNodes.map((node) => ({
-      name: node.dataset.name || '',
-      description: node.dataset.description || '',
-      image: node.dataset.image || '',
-      ctaUrl: node.dataset.ctaUrl || '',
-      ctaLabel: node.dataset.ctaLabel || 'View Partner',
-      perks: Array.from(node.querySelectorAll('[data-perk]')).map((perk) => perk.dataset.perk || '')
-    }));
-
-    const seen = new Set();
-    const slides = rawSlides.filter((slide) => {
-      const key = `${slide.name}||${slide.image}`;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    });
-
-    const duration = 5000;
-    let activeIndex = 0;
-    let timeoutId = null;
-    let rafId = null;
-    let startTime = 0;
-    let remaining = duration;
-    let paused = false;
-
-    function setProgress(ratio) {
-      if (!progress) return;
-      progress.style.transform = `scaleX(${Math.max(0, Math.min(1, ratio))})`;
-    }
-
-    function clearTimers() {
-      if (timeoutId) {
-        window.clearTimeout(timeoutId);
-        timeoutId = null;
-      }
-
-      if (rafId) {
-        window.cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-    }
-
-    function animateProgress(now) {
-      const elapsed = now - startTime;
-      const done = duration - remaining + elapsed;
-      setProgress(done / duration);
-
-      if (elapsed < remaining && !paused) {
-        rafId = window.requestAnimationFrame(animateProgress);
-      }
-    }
-
-    function scheduleRotation() {
-      if (reduceMotion || slides.length <= 1) {
-        setProgress(slides.length <= 1 ? 1 : 0);
-        return;
-      }
-
-      startTime = performance.now();
-
-      timeoutId = window.setTimeout(() => {
-        goToSlide((activeIndex + 1) % slides.length);
-      }, remaining);
-
-      rafId = window.requestAnimationFrame(animateProgress);
-    }
-
-    function buildPerks(slide) {
-      perks.innerHTML = '';
-
-      (slide.perks || []).forEach((perkText) => {
-        const chip = document.createElement('span');
-        chip.className = 'vv-partner-chip';
-        chip.textContent = perkText;
-        perks.appendChild(chip);
-      });
-    }
-
-    function buildCta(slide) {
-      ctaWrap.innerHTML = '';
-
-      if (!slide.ctaUrl) return;
-
-      const link = document.createElement('a');
-      link.href = slide.ctaUrl;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.className = 'btn btn-primary px-4';
-      link.textContent = slide.ctaLabel || 'View Partner';
-      ctaWrap.appendChild(link);
-    }
-
-    function centerActiveCard() {
-      const activeCard = selectorTrack.querySelector(`.vv-partner-selector-card[data-slide-index="${activeIndex}"]`);
-      if (!activeCard) return;
-
-      const scrollerRect = scroller.getBoundingClientRect();
-      const cardRect = activeCard.getBoundingClientRect();
-      const currentScroll = scroller.scrollLeft;
-
-      const targetLeft =
-        currentScroll +
-        (cardRect.left - scrollerRect.left) -
-        ((scroller.clientWidth / 2) - (activeCard.offsetWidth / 2));
-
-      const maxScroll = scroller.scrollWidth - scroller.clientWidth;
-      const finalLeft = Math.max(0, Math.min(targetLeft, maxScroll));
-
-      scroller.scrollTo({
-        left: finalLeft,
-        behavior: reduceMotion ? 'auto' : 'smooth'
-      });
-    }
-
-    function updateSelectorActive() {
-      selectorTrack.querySelectorAll('.vv-partner-selector-card').forEach((button) => {
-        const isActive = Number(button.dataset.slideIndex) === activeIndex;
-        button.classList.toggle('is-active', isActive);
-      });
-
-      centerActiveCard();
-    }
-
-    function renderSlide(index) {
-      const slide = slides[index];
-      if (!slide) return;
-
-      image.src = slide.image;
-      image.alt = slide.name;
-      name.textContent = slide.name;
-      description.textContent = slide.description;
-
-      buildPerks(slide);
-      buildCta(slide);
-
-      current.textContent = String(index + 1).padStart(2, '0');
-      total.textContent = String(slides.length).padStart(2, '0');
-
-      updateSelectorActive();
-    }
-
-    function startPopIn() {
-      presenter.classList.add('is-entering');
-
-      window.setTimeout(() => {
-        presenter.classList.remove('is-entering');
-      }, 420);
-    }
-
-    function goToSlide(index) {
-      clearTimers();
-      remaining = duration;
-      setProgress(0);
-
-      if (index === activeIndex) {
-        renderSlide(activeIndex);
-
-        if (!paused && !reduceMotion && slides.length > 1) {
-          scheduleRotation();
-        }
-        return;
-      }
-
-      presenter.classList.add('is-switching');
-
-      window.setTimeout(() => {
-        activeIndex = index;
-        renderSlide(activeIndex);
-        presenter.classList.remove('is-switching');
-        startPopIn();
-
-        if (!paused && !reduceMotion && slides.length > 1) {
-          scheduleRotation();
-        }
-      }, 180);
-    }
-
-    function pauseRotation() {
-      if (paused || reduceMotion || slides.length <= 1) return;
-
-      paused = true;
-      const elapsed = performance.now() - startTime;
-      remaining = Math.max(0, remaining - elapsed);
-      clearTimers();
-    }
-
-    function resumeRotation() {
-      if (!paused || reduceMotion || slides.length <= 1) return;
-
-      paused = false;
-
-      if (remaining <= 0) {
-        remaining = duration;
-        setProgress(0);
-      }
-
-      scheduleRotation();
-    }
-
-    function buildSelector() {
-      selectorTrack.innerHTML = '';
-
-      slides.forEach((slide, index) => {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'vv-partner-selector-card text-center';
-        button.dataset.slideIndex = index;
-
-        const media = document.createElement('span');
-        media.className = 'vv-partner-selector-media d-flex align-items-center justify-content-center overflow-hidden';
-
-        const mediaImg = document.createElement('img');
-        mediaImg.src = slide.image;
-        mediaImg.alt = slide.name;
-        mediaImg.className = 'vv-partner-selector-image';
-
-        const title = document.createElement('span');
-        title.className = 'vv-partner-selector-name';
-        title.textContent = slide.name;
-
-        media.appendChild(mediaImg);
-        button.appendChild(media);
-        button.appendChild(title);
-
-        button.addEventListener('click', () => {
-          goToSlide(index);
-        });
-
-        selectorTrack.appendChild(button);
-      });
-    }
-
-    buildSelector();
-    renderSlide(activeIndex);
-
-    presenter.addEventListener('mouseenter', pauseRotation);
-    presenter.addEventListener('mouseleave', resumeRotation);
-
-    prevBtn?.addEventListener('click', () => {
-      goToSlide((activeIndex - 1 + slides.length) % slides.length);
-    });
-
-    nextBtn?.addEventListener('click', () => {
-      goToSlide((activeIndex + 1) % slides.length);
-    });
-
-    if (!reduceMotion && slides.length > 1) {
-      scheduleRotation();
-    } else {
-      setProgress(slides.length <= 1 ? 1 : 0);
-    }
-  })();
-</script>
 {% endif %}

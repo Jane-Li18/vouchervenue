@@ -99,7 +99,7 @@ class AffiliatePartner(models.Model):
         help_text="Optional landing page URL shown on the partner detail page."
     )
 
-    cta_label = models.CharField(max_length=40, default="View Partner")
+    cta_label = models.CharField(max_length=40, default="Visit Partner")
     sort_order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 

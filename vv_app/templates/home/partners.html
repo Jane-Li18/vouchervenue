@@ -25,7 +25,7 @@
         data-description="{{ featured_partner.description }}"
         data-image="{{ featured_partner.image.url }}"
         data-cta-url="{{ featured_partner.website_url|default:featured_partner.cta_url|default:'' }}"
-        data-cta-label="{{ featured_partner.cta_label|default:'View Partner' }}"
+        data-cta-label="{{ featured_partner.cta_label|default:'Visit Partner' }}"
         data-detail-url="{{ featured_partner.get_absolute_url }}"
       >
         {% for perk in featured_partner.perk_list %}
@@ -41,7 +41,7 @@
         data-description="{{ partner.description }}"
         data-image="{{ partner.image.url }}"
         data-cta-url="{{ partner.website_url|default:partner.cta_url|default:'' }}"
-        data-cta-label="{{ partner.cta_label|default:'View Partner' }}"
+        data-cta-label="{{ partner.cta_label|default:'Visit Partner' }}"
         data-detail-url="{{ partner.get_absolute_url }}"
       >
         {% for perk in partner.perk_list %}

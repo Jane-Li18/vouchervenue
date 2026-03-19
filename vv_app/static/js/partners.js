@@ -399,23 +399,26 @@ function initPartnerShowcase() {
 }
 
 function initPartnerDetailGallery() {
-  const gallery = document.getElementById('vvPartnerGalleryCarousel');
-  const copyPanel = document.getElementById('vvPartnerGalleryCopyPanel');
-  const copyText = document.getElementById('vvPartnerGalleryDescription');
+  const stage = document.getElementById('vvPartnerDetailStage');
+  const visual = document.getElementById('vvPartnerGalleryStage');
+  const viewport = document.getElementById('vvPartnerGalleryViewport');
+  const progressBar = document.getElementById('vvPartnerGalleryProgress');
+  const caption = document.getElementById('vvPartnerGalleryCaption');
+  const current = document.getElementById('vvPartnerGalleryCurrent');
+  const total = document.getElementById('vvPartnerGalleryTotal');
   const prevBtn = document.getElementById('vvPartnerGalleryPrev');
   const nextBtn = document.getElementById('vvPartnerGalleryNext');
   const dots = Array.from(document.querySelectorAll('[data-gallery-dot]'));
-  const progressBar = copyPanel?.querySelector('.vv-partner-progress span');
 
-  if (!gallery) return;
+  if (!stage || !visual || !viewport) return;
 
-  const items = Array.from(gallery.querySelectorAll('.carousel-item'));
-  if (!items.length) return;
+  const slides = Array.from(viewport.querySelectorAll('.vv-partner-gallery-slide'));
+  if (!slides.length) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const duration = 5000;
 
-  let activeIndex = items.findIndex((item) => item.classList.contains('active'));
+  let activeIndex = slides.findIndex((slide) => slide.classList.contains('is-active'));
   let timeoutId = null;
   let rafId = null;
   let startTime = 0;
@@ -425,12 +428,16 @@ function initPartnerDetailGallery() {
 
   if (activeIndex < 0) activeIndex = 0;
 
+  if (slides.length <= 1) {
+    stage.classList.add('is-static');
+  }
+
   function setProgress(ratio) {
     if (!progressBar) return;
     progressBar.style.transform = `scaleX(${Math.max(0, Math.min(1, ratio))})`;
   }
 
-  function clearTimer() {
+  function clearTimers() {
     if (timeoutId) {
       window.clearTimeout(timeoutId);
       timeoutId = null;
@@ -440,11 +447,6 @@ function initPartnerDetailGallery() {
       window.cancelAnimationFrame(rafId);
       rafId = null;
     }
-  }
-
-  function clearClasses(element, classNames) {
-    if (!element) return;
-    classNames.forEach((name) => element.classList.remove(name));
   }
 
   function updateDots(index) {
@@ -461,8 +463,18 @@ function initPartnerDetailGallery() {
   }
 
   function updateCopy(index) {
-    if (!copyText) return;
-    copyText.textContent = items[index].dataset.galleryCopy || '';
+    if (!caption) return;
+    caption.textContent = slides[index].dataset.galleryCaption || '';
+  }
+
+  function updateCounter(index) {
+    if (current) {
+      current.textContent = String(index + 1).padStart(2, '0');
+    }
+
+    if (total) {
+      total.textContent = String(slides.length).padStart(2, '0');
+    }
   }
 
   function animateProgress(now) {
@@ -477,39 +489,39 @@ function initPartnerDetailGallery() {
   }
 
   function scheduleNext() {
-    clearTimer();
+    clearTimers();
 
-    if (reduceMotion || items.length <= 1) {
-      setProgress(items.length <= 1 ? 1 : 0);
+    if (reduceMotion || slides.length <= 1) {
+      setProgress(slides.length <= 1 ? 1 : 0);
       return;
     }
 
     startTime = performance.now();
 
     timeoutId = window.setTimeout(() => {
-      goToIndex((activeIndex + 1) % items.length);
+      goToIndex((activeIndex + 1) % slides.length);
     }, remaining);
 
     rafId = window.requestAnimationFrame(animateProgress);
   }
 
   function pauseRotation() {
-    if (paused || reduceMotion || items.length <= 1) return;
+    if (paused || reduceMotion || slides.length <= 1) return;
 
     paused = true;
 
     if (isAnimating) {
-      clearTimer();
+      clearTimers();
       return;
     }
 
     const elapsed = performance.now() - startTime;
     remaining = Math.max(0, remaining - elapsed);
-    clearTimer();
+    clearTimers();
   }
 
   function resumeRotation() {
-    if (!paused || reduceMotion || items.length <= 1) return;
+    if (!paused || reduceMotion || slides.length <= 1) return;
 
     paused = false;
 
@@ -523,142 +535,60 @@ function initPartnerDetailGallery() {
     scheduleNext();
   }
 
-  function playCopyEntry() {
-    if (!copyPanel) return;
+  function render(index) {
+    slides.forEach((slide, slideIndex) => {
+      slide.classList.toggle('is-active', slideIndex === index);
+    });
 
-    clearClasses(copyPanel, [
-      'is-switching-next',
-      'is-switching-prev',
-      'is-entering-next',
-      'is-entering-prev'
-    ]);
-
-    void copyPanel.offsetWidth;
-    copyPanel.classList.add('is-entering-next');
-
-    window.setTimeout(() => {
-      copyPanel.classList.remove('is-entering-next');
-    }, 420);
-  }
-
-  function playShellEntry(shell) {
-    if (!shell) return;
-
-    clearClasses(shell, [
-      'is-switching-next',
-      'is-switching-prev',
-      'is-entering-next',
-      'is-entering-prev'
-    ]);
-
-    void shell.offsetWidth;
-    shell.classList.add('is-entering-next');
-
-    window.setTimeout(() => {
-      shell.classList.remove('is-entering-next');
-    }, 420);
+    updateDots(index);
+    updateCopy(index);
+    updateCounter(index);
   }
 
   function goToIndex(nextIndex) {
-    if (isAnimating || nextIndex === activeIndex || !items[nextIndex]) return;
+    if (!slides[nextIndex] || isAnimating || nextIndex === activeIndex) return;
 
-    clearTimer();
+    clearTimers();
     remaining = duration;
     setProgress(0);
     isAnimating = true;
 
-    const currentItem = items[activeIndex];
-    const nextItem = items[nextIndex];
-    const currentShell = currentItem.querySelector('.vv-partner-gallery-shell');
-    const nextShell = nextItem.querySelector('.vv-partner-gallery-shell');
+    slides[activeIndex].classList.remove('is-active');
+    slides[nextIndex].classList.add('is-active');
+    activeIndex = nextIndex;
 
-    clearClasses(currentShell, [
-      'is-entering-next',
-      'is-entering-prev',
-      'is-switching-next',
-      'is-switching-prev'
-    ]);
+    updateDots(activeIndex);
+    updateCopy(activeIndex);
+    updateCounter(activeIndex);
 
-    if (currentShell) {
-      currentShell.classList.add('is-switching-next');
-    }
-
-    if (copyPanel) {
-      clearClasses(copyPanel, [
-        'is-entering-next',
-        'is-entering-prev',
-        'is-switching-next',
-        'is-switching-prev'
-      ]);
-      copyPanel.classList.add('is-switching-next');
-    }
-
-    const outDuration = reduceMotion ? 0 : 220;
+    const inDuration = reduceMotion ? 0 : 420;
 
     window.setTimeout(() => {
-      currentItem.classList.remove('active');
-      nextItem.classList.add('active');
-      activeIndex = nextIndex;
+      isAnimating = false;
 
-      updateDots(activeIndex);
-      updateCopy(activeIndex);
-
-      if (copyPanel) {
-        copyPanel.classList.remove('is-switching-next', 'is-switching-prev');
+      if (!paused) {
+        scheduleNext();
+      } else {
+        setProgress(0);
       }
-
-      playShellEntry(nextShell);
-      playCopyEntry();
-
-      const inDuration = reduceMotion ? 0 : 420;
-
-      window.setTimeout(() => {
-        clearClasses(nextShell, [
-          'is-entering-next',
-          'is-entering-prev',
-          'is-switching-next',
-          'is-switching-prev'
-        ]);
-
-        if (copyPanel) {
-          clearClasses(copyPanel, [
-            'is-entering-next',
-            'is-entering-prev',
-            'is-switching-next',
-            'is-switching-prev'
-          ]);
-        }
-
-        isAnimating = false;
-
-        if (!paused) {
-          scheduleNext();
-        } else {
-          setProgress(0);
-        }
-      }, inDuration);
-    }, outDuration);
+    }, inDuration);
   }
 
-  updateDots(activeIndex);
-  updateCopy(activeIndex);
+  render(activeIndex);
   setProgress(0);
 
-  playShellEntry(items[activeIndex].querySelector('.vv-partner-gallery-shell'));
-  playCopyEntry();
-
-  if (!reduceMotion && items.length > 1) {
+  if (!reduceMotion && slides.length > 1) {
     scheduleNext();
   } else {
-    setProgress(items.length <= 1 ? 1 : 0);
+    setProgress(slides.length <= 1 ? 1 : 0);
   }
 
   prevBtn?.addEventListener('click', () => {
-    goToIndex((activeIndex - 1 + items.length) % items.length);
+    goToIndex((activeIndex - 1 + slides.length) % slides.length);
   });
 
   nextBtn?.addEventListener('click', () => {
-    goToIndex((activeIndex + 1) % items.length);
+    goToIndex((activeIndex + 1) % slides.length);
   });
 
   dots.forEach((dot) => {
@@ -669,6 +599,6 @@ function initPartnerDetailGallery() {
     });
   });
 
-  gallery.addEventListener('mouseenter', pauseRotation);
-  gallery.addEventListener('mouseleave', resumeRotation);
+  viewport.addEventListener('mouseenter', pauseRotation);
+  viewport.addEventListener('mouseleave', resumeRotation);
 }

@@ -84,40 +84,6 @@
                   </div>
                 {% endif %}
               </div>
-
-              <div class="vv-partner-detail-stage-caption-wrap">
-                <div class="vv-partner-detail-stage-counter">
-                  <span id="vvPartnerGalleryCurrent">01</span>
-                  <span class="vv-partner-detail-stage-counter-divider">/</span>
-                  <span id="vvPartnerGalleryTotal">
-                    {% if gallery_images %}
-                      {{ gallery_images|length|stringformat:"02d" }}
-                    {% else %}
-                      01
-                    {% endif %}
-                  </span>
-                </div>
-
-                <p class="vv-partner-detail-stage-caption mb-0" id="vvPartnerGalleryCaption">
-                  {% if gallery_images %}
-                    {% with first_item=gallery_images.0 %}
-                      {% if first_item.description %}
-                        {{ first_item.description }}
-                      {% elif partner.short_description %}
-                        {{ partner.short_description }}
-                      {% else %}
-                        {{ partner.main_description|truncatechars:220 }}
-                      {% endif %}
-                    {% endwith %}
-                  {% elif partner.short_description %}
-                    {{ partner.short_description }}
-                  {% elif partner.main_description %}
-                    {{ partner.main_description|truncatechars:220 }}
-                  {% else %}
-                    {{ partner.name }}
-                  {% endif %}
-                </p>
-              </div>
             </div>
           </div>
 
@@ -152,6 +118,37 @@
                   {% elif partner.short_description %}
                     <p>{{ partner.short_description }}</p>
                   {% endif %}
+                </div>
+
+                <p class="vv-partner-detail-stage-caption mb-0 mt-3" id="vvPartnerGalleryCaption">
+                  {% if gallery_images %}
+                    {% with first_item=gallery_images.0 %}
+                      {% if first_item.description %}
+                        {{ first_item.description }}
+                      {% elif partner.short_description %}
+                        {{ partner.short_description }}
+                      {% else %}
+                        {{ partner.main_description|truncatechars:220 }}
+                      {% endif %}
+                    {% endwith %}
+                  {% elif partner.short_description %}
+                    {{ partner.short_description }}
+                  {% elif partner.main_description %}
+                    {{ partner.main_description|truncatechars:220 }}
+                  {% else %}
+                    {{ partner.name }}
+                  {% endif %}
+                </p>
+
+                <div class="d-none">
+                  <span id="vvPartnerGalleryCurrent">01</span>
+                  <span id="vvPartnerGalleryTotal">
+                    {% if gallery_images %}
+                      {{ gallery_images|length|stringformat:"02d" }}
+                    {% else %}
+                      01
+                    {% endif %}
+                  </span>
                 </div>
               </div>
 

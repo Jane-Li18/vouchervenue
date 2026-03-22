@@ -55,31 +55,31 @@
     <div class="vv-partner-detail-fullwrap">
       <article class="vv-partner-detail-stage vv-partner-reveal vv-partner-reveal-delay-1 overflow-hidden mx-auto" id="vvPartnerDetailStage">
         <div class="vv-partner-detail-stage-grid">
-          <div class="vv-partner-detail-stage-visual" id="vvPartnerGalleryStage">
-            <div class="vv-partner-gallery-carousel">
-              <div class="vv-partner-gallery-viewport" id="vvPartnerGalleryViewport">
+          <div class="vv-partner-detail-stage-visual d-flex" id="vvPartnerGalleryStage">
+            <div class="vv-partner-gallery-carousel w-100 h-100 d-flex flex-column">
+              <div class="vv-partner-gallery-viewport position-relative flex-grow-1 w-100 h-100" id="vvPartnerGalleryViewport">
                 {% if gallery_images %}
                   {% for item in gallery_images %}
                   <div
-                    class="vv-partner-gallery-slide {% if forloop.first %}is-active{% endif %}"
+                    class="vv-partner-gallery-slide {% if forloop.first %}is-active{% endif %} position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center overflow-hidden"
                     data-gallery-caption="{% if item.description %}{{ item.description|striptags }}{% elif partner.short_description %}{{ partner.short_description|striptags }}{% else %}{{ partner.main_description|truncatechars:220|striptags }}{% endif %}"
                   >
                     <img
                       src="{{ item.image.url }}"
                       alt="{{ partner.name }} gallery image {{ forloop.counter }}"
-                      class="vv-partner-gallery-image"
+                      class="vv-partner-gallery-image w-100 h-100 d-block"
                     >
                   </div>
                   {% endfor %}
                 {% else %}
                   <div
-                    class="vv-partner-gallery-slide is-active"
+                    class="vv-partner-gallery-slide is-active position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center overflow-hidden"
                     data-gallery-caption="{% if partner.short_description %}{{ partner.short_description|striptags }}{% elif partner.main_description %}{{ partner.main_description|truncatechars:220|striptags }}{% else %}{{ partner.name }}{% endif %}"
                   >
                     <img
                       src="{{ partner.image.url }}"
                       alt="{{ partner.name }}"
-                      class="vv-partner-gallery-image"
+                      class="vv-partner-gallery-image w-100 h-100 d-block"
                     >
                   </div>
                 {% endif %}
@@ -239,7 +239,6 @@
       {% include "components/pop.html" %}
       {% include "components/growth.html" %}
     </div>
-
   </div>
 </section>
 {% endblock %}
